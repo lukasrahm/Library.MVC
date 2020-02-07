@@ -13,6 +13,7 @@ namespace Library.MVC.Models
         public string ISBN { get; set; }
         [Display(Name = "Titel")]
         [MaxLength(25)]
+        [Required]
         public string Title { get; set; }
         [Display(Name = "Bok")]
         public SelectList BookDetailsList { get; set; }
