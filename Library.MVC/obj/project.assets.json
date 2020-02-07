@@ -8660,23 +8660,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lukas\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\marcu\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lukas\\Desktop\\Skola\\Library.MVC\\Library.MVC\\Library.MVC.csproj",
+      "projectUniqueName": "C:\\Users\\marcu\\Documents\\GitHub\\Library.MVC\\Library.MVC\\Library.MVC.csproj",
       "projectName": "Library.MVC",
-      "projectPath": "C:\\Users\\lukas\\Desktop\\Skola\\Library.MVC\\Library.MVC\\Library.MVC.csproj",
-      "packagesPath": "C:\\Users\\lukas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lukas\\Desktop\\Skola\\Library.MVC\\Library.MVC\\obj\\",
+      "projectPath": "C:\\Users\\marcu\\Documents\\GitHub\\Library.MVC\\Library.MVC\\Library.MVC.csproj",
+      "packagesPath": "C:\\Users\\marcu\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\marcu\\Documents\\GitHub\\Library.MVC\\Library.MVC\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\lukas\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\marcu\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8689,11 +8685,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\lukas\\Desktop\\Skola\\Library.MVC\\Library.Application\\Library.Application.csproj": {
-              "projectPath": "C:\\Users\\lukas\\Desktop\\Skola\\Library.MVC\\Library.Application\\Library.Application.csproj"
+            "C:\\Users\\marcu\\Documents\\GitHub\\Library.MVC\\Library.Application\\Library.Application.csproj": {
+              "projectPath": "C:\\Users\\marcu\\Documents\\GitHub\\Library.MVC\\Library.Application\\Library.Application.csproj"
             },
-            "C:\\Users\\lukas\\Desktop\\Skola\\Library.MVC\\Library.Infrastructure\\Library.Infrastructure.csproj": {
-              "projectPath": "C:\\Users\\lukas\\Desktop\\Skola\\Library.MVC\\Library.Infrastructure\\Library.Infrastructure.csproj"
+            "C:\\Users\\marcu\\Documents\\GitHub\\Library.MVC\\Library.Infrastructure\\Library.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\marcu\\Documents\\GitHub\\Library.MVC\\Library.Infrastructure\\Library.Infrastructure.csproj"
             }
           }
         }
