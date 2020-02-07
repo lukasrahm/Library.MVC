@@ -1,0 +1,46 @@
+﻿@model Library.MVC.Models.BookIndexVm;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Titel</th>
+            <th>Författare</th>
+            <th>Beskrivning</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Books)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details.Title)
+                </td>
+                <td> 
+                    @Html.DisplayFor(modelItem => item.Details.Author.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details.Description)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Details.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Details.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

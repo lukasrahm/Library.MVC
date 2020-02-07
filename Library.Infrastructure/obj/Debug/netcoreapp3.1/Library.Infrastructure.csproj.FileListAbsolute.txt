@@ -1,0 +1,52 @@
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Infrastructure.deps.json
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Infrastructure.dll
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Infrastructure.pdb
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Application.dll
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Domain.dll
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Application.pdb
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Domain.pdb
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.csprojAssemblyReference.cache
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.AssemblyInfo.cs
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.csproj.CopyComplete
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.dll
+C:\Users\lukas\Desktop\Skola\F7\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Infrastructure.deps.json
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Infrastructure.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Infrastructure.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Application.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Domain.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Application.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Domain.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.csprojAssemblyReference.cache
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.AssemblyInfo.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.csproj.CopyComplete
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Infrastructure.deps.json
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Infrastructure.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Infrastructure.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Application.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Domain.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Application.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Domain.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.csprojAssemblyReference.cache
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.AssemblyInfo.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.csproj.CopyComplete
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC - Copy\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Infrastructure.deps.json
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Infrastructure.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Infrastructure.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Application.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Domain.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Application.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\bin\Debug\netcoreapp3.1\Library.Domain.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.csprojAssemblyReference.cache
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.AssemblyInfo.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.csproj.CopyComplete
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Infrastructure\obj\Debug\netcoreapp3.1\Library.Infrastructure.pdb
