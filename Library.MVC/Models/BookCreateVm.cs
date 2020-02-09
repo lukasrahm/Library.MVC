@@ -9,14 +9,11 @@ namespace Library.MVC.Models
 {
     public class BookCreateVm
     {
+        [Display(Name = "Bokdetaljer")]
+        public SelectList DetailsList { get; set; }
         [Required]
-        public string ISBN { get; set; }
-        [Display(Name = "Titel")]
-        [MaxLength(25)]
+        public int DetailId { get; set; }
         [Required]
-        public string Title { get; set; }
-        [Display(Name = "Bok")]
-        public SelectList BookDetailsList { get; set; }
         public int AmountOfCopies { get; set; }
     }
 }

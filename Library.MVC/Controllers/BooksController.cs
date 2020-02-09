@@ -8,25 +8,26 @@ using Microsoft.EntityFrameworkCore;
 using Library.Domain;
 using Library.MVC.Models;
 using Library.Application.Interfaces;
+using Library.Infrastructure.Services;
 
 namespace Library.MVC.Controllers
 {
     public class BooksController : Controller
     {
-        private readonly IBookService bookservice;
-        private readonly IAuthorService authorService;
+        private readonly IBookService bookService;
+        private readonly IBookDetailsService bookDetailsService;
 
-        public BooksController(IBookService bookservice, IAuthorService authorService)
+        public BooksController(IBookService bookService, IBookDetailsService bookDetailsService)
         {
-            this.bookservice = bookservice;
-            this.authorService = authorService;
+            this.bookService = bookService;
+            this.bookDetailsService = bookDetailsService;
         }
 
         //GET: Books
         public async Task<IActionResult> Index()
         {
             var vm = new BookIndexVm();
-            vm.Books = bookservice.GetAllBooks();
+            vm.Books = bookService.GetAllBooks();
             return View(vm);
         }
 
@@ -53,7 +54,7 @@ namespace Library.MVC.Controllers
         public IActionResult Create()
         {
             var vm = new BookCreateVm();
-            vm.AuthorList = new SelectList(authorService.GetAllAuthors(), "Id", "Name");
+            vm.DetailsList = new SelectList(bookDetailsService.GetAllBookDetails(), "Id", "Title");
             return View(vm);
         }
 
@@ -66,14 +67,15 @@ namespace Library.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                //Skapa ny bok
-                var newBook = new BookDetails();
-                newBook.AuthorId = vm.AuthorId;
-                newBook.Description = vm.Description;
-                newBook.ISBN = vm.ISBN;
-                newBook.Title = vm.Title;
+                for (int i = 0; i < vm.AmountOfCopies; i++)
+                {
+                    //Skapa ny bok
+                    var addBook = new Book();
 
-                bookservice.AddBook(newBook);
+                    addBook.DetailsId = vm.DetailId;
+                    bookService.AddBook(addBook);
+
+                }
 
                 return RedirectToAction(nameof(Index));
             }

@@ -25,8 +25,8 @@ namespace Library.MVC.Controllers
         //GET: Books
         public async Task<IActionResult> Index()
         {
-            var vm = new BookIndexVm();
-            vm.Books = bookdetailsservice.GetAllBookDetails();
+            var vm = new NewBookIndexVm();
+            vm.BookDetails = bookdetailsservice.GetAllBookDetails();
             return View(vm);
         }
 

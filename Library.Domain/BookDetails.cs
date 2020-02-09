@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Library.Domain
 {
@@ -12,6 +10,5 @@ namespace Library.Domain
         public int AuthorId { get; set; }
         public Author Author { get; set; }
         public string Description { get; set; }
-        public ICollection<Book> Copeis { get; set; }
     }
 }

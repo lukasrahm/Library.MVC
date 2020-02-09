@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "Index";
 }
-
 <h1>Index</h1>
 
 <p>
@@ -16,31 +15,58 @@
             <th>Titel</th>
             <th>Författare</th>
             <th>Beskrivning</th>
+            <th>Exemplar</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Books)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Details.ISBN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Details.Title)
-                </td>
-                <td> 
-                    @Html.DisplayFor(modelItem => item.Details.Author.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Details.Description)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Details.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Details.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                </td>
-            </tr>
+        @{
+            int tempDetailId = -2;
+            int copies = 0;
+            int lastBookCopies = 0;
+            Library.Domain.Book lastBook = null;
+            foreach (var item in Model.Books)
+            {
+                //If the book is of a new type
+                if (item.DetailsId != tempDetailId)
+                {
+                    copies = 1;
+                    tempDetailId = item.DetailsId;
+                    if (lastBook != null)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => lastBook.Details.ISBN)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => lastBook.Details.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => lastBook.Details.Author.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => lastBook.Details.Description)
+                            </td>
+                            <td>
+                                @copies;
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Details.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Details.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+
+                }
+                else
+                {
+                    copies++;
+                    lastBook = item;
+                    lastBookCopies = copies;
+                }
+
+            }
         }
     </tbody>
 </table>

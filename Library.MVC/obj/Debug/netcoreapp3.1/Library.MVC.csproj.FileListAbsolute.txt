@@ -524,3 +524,9 @@ C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.MVC\obj\Debug\netco
 C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.AssemblyInfo.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.dll
 C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Authors\Create.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Authors\Index.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Books\New\Create.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Books\New\Index.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Members\Create.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Members\Index.cshtml.g.cs

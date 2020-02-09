@@ -1,4 +1,4 @@
-﻿@model Library.MVC.Models.BookIndexVm;
+﻿@model Library.MVC.Models.NewBookIndexVm;
 
 @{
     ViewData["Title"] = "Index";
@@ -20,24 +20,24 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Books)
+        @foreach (var item in Model.BookDetails)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Details.ISBN)
+                    @Html.DisplayFor(modelItem => item.ISBN)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Details.Title)
+                    @Html.DisplayFor(modelItem => item.Title)
                 </td>
                 <td> 
-                    @Html.DisplayFor(modelItem => item.Details.Author.Name)
+                    @Html.DisplayFor(modelItem => item.Author.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Details.Description)
+                    @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Details.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Details.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>

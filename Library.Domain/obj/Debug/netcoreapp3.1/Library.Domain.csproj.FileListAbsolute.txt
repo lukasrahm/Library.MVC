@@ -22,3 +22,11 @@ C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Domain\obj\Debug\ne
 C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.AssemblyInfo.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.dll
 C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\bin\Debug\netcoreapp3.1\Library.Domain.deps.json
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\bin\Debug\netcoreapp3.1\Library.Domain.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\bin\Debug\netcoreapp3.1\Library.Domain.pdb
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.csprojAssemblyReference.cache
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.AssemblyInfoInputs.cache
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.AssemblyInfo.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.dll
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.pdb

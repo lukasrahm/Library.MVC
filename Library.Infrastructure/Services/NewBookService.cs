@@ -24,11 +24,6 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
         }
 
-        public ICollection<BookDetails> GetAllBooks()
-        {
-            // Here we are using .Include() to eager load the author, read more about loading related data at https://docs.microsoft.com/en-us/ef/core/querying/related-data
-            return context.BookDetails.Include(x => x.Author).OrderBy(x => x.Title).ToList();
-        }
 
         public void UpdateBookDetails(BookDetails book)
         {
@@ -40,9 +35,11 @@ namespace Library.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        ICollection<BookDetails> IBookDetailsService.GetAllBookDetails()
+
+        public IList<BookDetails> GetAllBookDetails()
         {
-            throw new NotImplementedException();
+            // Here we are NOT using .Include() so the authors books will NOT be loaded, read more about loading related data at https://docs.microsoft.com/en-us/ef/core/querying/related-data
+            return context.BookDetails.OrderBy(x => x.Title).ToList();
         }
     }
 }

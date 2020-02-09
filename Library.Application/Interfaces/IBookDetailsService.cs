@@ -13,6 +13,6 @@ namespace Library.Application.Interfaces
         /// <param name="book"></param>
         void AddNewBook(BookDetails bookdetails);
 
-        ICollection<BookDetails> GetAllBookDetails();
+        IList<BookDetails> GetAllBookDetails();
     }
 }
