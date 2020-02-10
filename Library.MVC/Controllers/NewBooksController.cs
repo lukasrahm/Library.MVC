@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Library.Domain;
 using Library.MVC.Models;
 using Library.Application.Interfaces;
+using Library.Infrastructure.Persistence;
+
 
 namespace Library.MVC.Controllers
 {
@@ -27,6 +29,7 @@ namespace Library.MVC.Controllers
         {
             var vm = new NewBookIndexVm();
             vm.BookDetails = bookdetailsservice.GetAllBookDetails();
+            vm.Authors = authorService.GetAllAuthors();
             return View(vm);
         }
 
@@ -81,57 +84,121 @@ namespace Library.MVC.Controllers
             return RedirectToAction("Error","Home","");
         }
 
-        //// GET: Books/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
+        // GET: Books/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            using (ApplicationDbContext _context = new ApplicationDbContext())
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var bookDetails = await _context.BookDetails
+                    .Include(b => b.Author)
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (bookDetails == null)
+                {
+                    return NotFound();
+                }
+
+                return View(bookDetails);
+            }
+                
+        }
+
+        // GET: Books/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            using (ApplicationDbContext _context = new ApplicationDbContext())
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var bookDetails = await _context.BookDetails.FindAsync(id);
+                if (bookDetails == null)
+                {
+                    return NotFound();
+                }
+                ViewData["AuthorID"] = new SelectList(_context.Authors, "Id", "Id", bookDetails.AuthorId);
+                return View(bookDetails);
+            }
+        }
+
+        // POST: Books/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("ID,ISBN,Title,AuthorID,Description")] BookDetails bookDetails)
+        {
+            using (ApplicationDbContext _context = new ApplicationDbContext())
+            {
+                if (id != bookDetails.Id)
+                {
+                    return NotFound();
+                }
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(bookDetails);
+                        await _context.SaveChangesAsync();
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (id != bookDetails.Id)
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
+                    }
+                    return RedirectToAction(nameof(Index));
+                }
+                ViewData["AuthorId"] = new SelectList(_context.Authors, "Id", "Id", bookDetails.AuthorId);
+                return View(bookDetails);
+            }
+        }
+
+        //// GET: Books/Delete/5
+        //public async Task<IActionResult> Delete(int? id)
         //{
         //    if (id == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    var bookDetails = await _context.BookDetails.FindAsync(id);
+        //    var bookDetails = await _context.BookDetails
+        //        .Include(b => b.Author)
+        //        .FirstOrDefaultAsync(m => m.ID == id);
         //    if (bookDetails == null)
         //    {
         //        return NotFound();
         //    }
-        //    ViewData["AuthorID"] = new SelectList(_context.Authors, "Id", "Id", bookDetails.AuthorID);
+
         //    return View(bookDetails);
         //}
 
-        //// POST: Books/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
+        //// POST: Books/Delete/5
+        //[HttpPost, ActionName("Delete")]
         //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("ID,ISBN,Title,AuthorID,Description")] BookDetails bookDetails)
+        //public async Task<IActionResult> DeleteConfirmed(int id)
         //{
-        //    if (id != bookDetails.ID)
-        //    {
-        //        return NotFound();
-        //    }
+        //    var bookDetails = await _context.BookDetails.FindAsync(id);
+        //    _context.BookDetails.Remove(bookDetails);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(bookDetails);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!BookDetailsExists(bookDetails.ID))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["AuthorID"] = new SelectList(_context.Authors, "Id", "Id", bookDetails.AuthorID);
-        //    return View(bookDetails);
+        //private bool BookDetailsExists(int id)
+        //{
+        //    return _context.BookDetails.Any(e => e.ID == id);
         //}
 
     }

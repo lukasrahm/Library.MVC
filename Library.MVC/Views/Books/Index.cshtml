@@ -20,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-        @{
+        @{ 
             foreach (var bookDetail in Model.Details)
             {
                 foreach (var book in Model.Books)
@@ -48,11 +48,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => bookDetail.Copies)
                         </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@bookDetail.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@bookDetail.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@bookDetail.Id">Delete</a>
-                        </td>
+                        @*<td>
+                            <a asp-action="Loan" asp-route-id="@bookDetail">Låna</a>
+                        </td>*@
                     </tr>
                 }
 

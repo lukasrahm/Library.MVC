@@ -17,6 +17,7 @@ namespace Library.MVC.Models
 
 
         [Display(Name = "Namn")]
+        [Required]
         public string Name { get; set; }
 
     }

@@ -9,5 +9,6 @@ namespace Library.MVC.Models
     public class NewBookIndexVm
     {
         public ICollection<BookDetails> BookDetails { get; set; } = new List<BookDetails>();
+        public ICollection<Author> Authors { get; set; } = new List<Author>();
     }
 }

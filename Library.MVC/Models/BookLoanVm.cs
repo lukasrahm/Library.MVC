@@ -7,10 +7,14 @@ using System.Threading.Tasks;
 
 namespace Library.MVC.Models
 {
-    public class AuthorCreateVm
+    public class BookLoanVm
     {
-        [Display(Name = "Name")]
+        [Display(Name = "Medlems SSN")]
         [Required]
-        public string Name { get; set; }
+        [MinLength(12)]
+        [MaxLength(12)]
+        public string MemberSSN { get; set; }
+        [Required]
+        public int BookId { get; set; }
     }
 }

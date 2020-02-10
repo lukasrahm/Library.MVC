@@ -17,7 +17,9 @@ namespace Library.MVC.Models
         public string Title { get; set; }
         [Display(Name = "Författare")]
         public SelectList AuthorList { get; set; }
+        [Required]
         public int AuthorId { get; set; }
+        [Required]
         public string Description { get; set; }
     }
 }

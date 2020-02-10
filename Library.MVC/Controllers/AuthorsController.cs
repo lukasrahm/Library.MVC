@@ -54,7 +54,7 @@ namespace Library.MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction("Error","Home","");
+            return RedirectToAction("Error", "Home", "");
         }
     }
 }
