@@ -2,7 +2,7 @@
 
 namespace Library.Infrastructure.Migrations
 {
-    public partial class migration : Migration
+    public partial class migraiton1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

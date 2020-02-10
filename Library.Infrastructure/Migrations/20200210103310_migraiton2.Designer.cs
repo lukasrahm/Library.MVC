@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200209134648_remove")]
-    partial class remove
+    [Migration("20200210103310_migraiton2")]
+    partial class migraiton2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -170,7 +170,7 @@ namespace Library.Infrastructure.Migrations
             modelBuilder.Entity("Library.Domain.Book", b =>
                 {
                     b.HasOne("Library.Domain.BookDetails", "Details")
-                        .WithMany("Copeis")
+                        .WithMany("Copies")
                         .HasForeignKey("DetailsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

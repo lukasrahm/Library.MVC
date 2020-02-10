@@ -39,7 +39,7 @@ namespace Library.Infrastructure.Services
         public IList<BookDetails> GetAllBookDetails()
         {
             // Here we are NOT using .Include() so the authors books will NOT be loaded, read more about loading related data at https://docs.microsoft.com/en-us/ef/core/querying/related-data
-            return context.BookDetails.OrderBy(x => x.Title).ToList();
+            return context.BookDetails.OrderBy(x => x.Id).ToList();
         }
     }
 }

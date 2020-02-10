@@ -3,14 +3,16 @@ using Library.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Library.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200210105522_migraiton4")]
+    partial class migraiton4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -105,9 +107,6 @@ namespace Library.Infrastructure.Migrations
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Copies")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -128,7 +127,6 @@ namespace Library.Infrastructure.Migrations
                         {
                             Id = 1,
                             AuthorId = 1,
-                            Copies = 0,
                             Description = "Arguably Shakespeare's greatest tragedy",
                             ISBN = "1472518381",
                             Title = "Hamlet"
@@ -137,7 +135,6 @@ namespace Library.Infrastructure.Migrations
                         {
                             Id = 2,
                             AuthorId = 1,
-                            Copies = 0,
                             Description = "King Lear is a tragedy written by William Shakespeare. It depicts the gradual descent into madness of the title character, after he disposes of his kingdom by giving bequests to two of his three daughters egged on by their continual flattery, bringing tragic consequences for all.",
                             ISBN = "9780141012292",
                             Title = "King Lear"
@@ -146,7 +143,6 @@ namespace Library.Infrastructure.Migrations
                         {
                             Id = 3,
                             AuthorId = 2,
-                            Copies = 0,
                             Description = "An intense drama of love, deception, jealousy and destruction.",
                             ISBN = "1853260185",
                             Title = "Othello"
@@ -174,7 +170,7 @@ namespace Library.Infrastructure.Migrations
             modelBuilder.Entity("Library.Domain.Book", b =>
                 {
                     b.HasOne("Library.Domain.BookDetails", "Details")
-                        .WithMany()
+                        .WithMany("Copies")
                         .HasForeignKey("DetailsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -12,5 +12,6 @@ namespace Library.MVC.Models
         [Display(Name = "Name")]
         [Required]
         public string Name { get; set; }
+        public SelectList Books { get; set; }
     }
 }

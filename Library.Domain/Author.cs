@@ -6,6 +6,6 @@ namespace Library.Domain
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public IList<BookDetails> Books { get; set; }
+        public List<BookDetails> Books { get; set; }
     }
 }

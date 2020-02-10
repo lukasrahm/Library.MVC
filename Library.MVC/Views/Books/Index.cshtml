@@ -21,49 +21,39 @@
     </thead>
     <tbody>
         @{
-            int tempDetailId = -2;
-            int copies = 0;
-            int lastBookCopies = 0;
-            Library.Domain.Book lastBook = null;
-            foreach (var item in Model.Books)
+            foreach (var bookDetail in Model.Details)
             {
-                //If the book is of a new type
-                if (item.DetailsId != tempDetailId)
+                foreach (var book in Model.Books)
                 {
-                    copies = 1;
-                    tempDetailId = item.DetailsId;
-                    if (lastBook != null)
+                    if (book.DetailsId == bookDetail.Id)
                     {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => lastBook.Details.ISBN)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => lastBook.Details.Title)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => lastBook.Details.Author.Name)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => lastBook.Details.Description)
-                            </td>
-                            <td>
-                                @copies;
-                            </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.Details.Id">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.Details.Id">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            </td>
-                        </tr>
+                        bookDetail.Copies++;
                     }
-
                 }
-                else
+                if (bookDetail.Copies != 0)
                 {
-                    copies++;
-                    lastBook = item;
-                    lastBookCopies = copies;
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => bookDetail.ISBN)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => bookDetail.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => bookDetail.Author.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => bookDetail.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => bookDetail.Copies)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@bookDetail.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@bookDetail.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@bookDetail.Id">Delete</a>
+                        </td>
+                    </tr>
                 }
 
             }

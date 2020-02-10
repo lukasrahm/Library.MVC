@@ -16,17 +16,21 @@ namespace Library.MVC.Controllers
     {
         private readonly IBookService bookService;
         private readonly IBookDetailsService bookDetailsService;
+        private readonly IAuthorService authorService;
 
-        public BooksController(IBookService bookService, IBookDetailsService bookDetailsService)
+        public BooksController(IBookService bookService, IBookDetailsService bookDetailsService, IAuthorService authorService)
         {
             this.bookService = bookService;
             this.bookDetailsService = bookDetailsService;
+            this.authorService = authorService;
         }
 
         //GET: Books
         public async Task<IActionResult> Index()
         {
             var vm = new BookIndexVm();
+            vm.Details = bookDetailsService.GetAllBookDetails();
+            vm.Authors = authorService.GetAllAuthors();
             vm.Books = bookService.GetAllBooks();
             return View(vm);
         }
