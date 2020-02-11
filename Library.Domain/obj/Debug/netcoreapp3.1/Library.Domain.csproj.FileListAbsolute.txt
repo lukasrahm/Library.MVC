@@ -30,3 +30,11 @@ C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.AssemblyInfo.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.dll
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.pdb
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Domain\bin\Debug\netcoreapp3.1\Library.Domain.deps.json
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Domain\bin\Debug\netcoreapp3.1\Library.Domain.dll
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Domain\bin\Debug\netcoreapp3.1\Library.Domain.pdb
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.csprojAssemblyReference.cache
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.AssemblyInfoInputs.cache
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.AssemblyInfo.cs
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.dll
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.pdb

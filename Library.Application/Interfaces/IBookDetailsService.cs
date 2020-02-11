@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Library.Application.Interfaces
 {
@@ -14,5 +15,6 @@ namespace Library.Application.Interfaces
         void AddNewBook(BookDetails bookdetails);
 
         IList<BookDetails> GetAllBookDetails();
+        BookDetails GetBookDetails(int? id);
     }
 }

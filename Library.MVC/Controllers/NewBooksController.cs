@@ -81,7 +81,7 @@ namespace Library.MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction("Error","Home","");
+            return RedirectToAction("Error", "Home", "");
         }
 
         // GET: Books/Details/5
@@ -104,27 +104,33 @@ namespace Library.MVC.Controllers
 
                 return View(bookDetails);
             }
-                
+
         }
 
         // GET: Books/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            using (ApplicationDbContext _context = new ApplicationDbContext())
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
 
-                var bookDetails = await _context.BookDetails.FindAsync(id);
-                if (bookDetails == null)
-                {
-                    return NotFound();
-                }
-                ViewData["AuthorID"] = new SelectList(_context.Authors, "Id", "Id", bookDetails.AuthorId);
-                return View(bookDetails);
+            if (id == null)
+            {
+                return NotFound();
             }
+
+            var bookDetails = bookdetailsservice.GetBookDetails(id);
+            if (bookDetails == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new BookEditVm();
+            vm.Id = bookDetails.Id;
+            vm.ISBN = bookDetails.ISBN;
+            vm.Title = bookDetails.Title;
+            vm.AuthorId = bookDetails.AuthorId;
+            vm.Description = bookDetails.Description;
+            vm.SelectAuthorList = new SelectList(authorService.GetAllAuthors(), nameof(Author.Id), nameof(Author.Name), bookDetails.AuthorId);
+            return View(vm);
+
         }
 
         // POST: Books/Edit/5
@@ -166,40 +172,51 @@ namespace Library.MVC.Controllers
             }
         }
 
-        //// GET: Books/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: Books/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            using (ApplicationDbContext _context = new ApplicationDbContext())
+            {
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-        //    var bookDetails = await _context.BookDetails
-        //        .Include(b => b.Author)
-        //        .FirstOrDefaultAsync(m => m.ID == id);
-        //    if (bookDetails == null)
-        //    {
-        //        return NotFound();
-        //    }
+                var bookDetails = await _context.BookDetails
+                    .Include(b => b.Author)
+                    .FirstOrDefaultAsync(m => m.Id == id);
+                if (bookDetails == null)
+                {
+                    return NotFound();
+                }
 
-        //    return View(bookDetails);
-        //}
+                return View(bookDetails);
+            }
+        }
 
-        //// POST: Books/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var bookDetails = await _context.BookDetails.FindAsync(id);
-        //    _context.BookDetails.Remove(bookDetails);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        // POST: Books/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            using (ApplicationDbContext _context = new ApplicationDbContext())
+            {
+                var bookDetails = await _context.BookDetails.FindAsync(id);
+                _context.BookDetails.Remove(bookDetails);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+        }
 
-        //private bool BookDetailsExists(int id)
-        //{
-        //    return _context.BookDetails.Any(e => e.ID == id);
-        //}
+        private bool BookDetailsExists(int id)
+        {
+            using (ApplicationDbContext _context = new ApplicationDbContext())
+            {
+
+                return _context.BookDetails.Any(e => e.Id == id);
+            }
+
+        }
 
     }
 }

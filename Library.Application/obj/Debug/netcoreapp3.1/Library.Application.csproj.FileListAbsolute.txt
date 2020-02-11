@@ -42,3 +42,14 @@ C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Application\obj\Deb
 C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Application\obj\Debug\netcoreapp3.1\Library.Application.csproj.CopyComplete
 C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Application\obj\Debug\netcoreapp3.1\Library.Application.dll
 C:\Users\lukas\Desktop\Skola\Library.MVC\library_dev\Library.Application\obj\Debug\netcoreapp3.1\Library.Application.pdb
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Application\bin\Debug\netcoreapp3.1\Library.Application.deps.json
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Application\bin\Debug\netcoreapp3.1\Library.Application.dll
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Application\bin\Debug\netcoreapp3.1\Library.Application.pdb
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Application\bin\Debug\netcoreapp3.1\Library.Domain.dll
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Application\bin\Debug\netcoreapp3.1\Library.Domain.pdb
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Application\obj\Debug\netcoreapp3.1\Library.Application.csprojAssemblyReference.cache
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Application\obj\Debug\netcoreapp3.1\Library.Application.AssemblyInfoInputs.cache
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Application\obj\Debug\netcoreapp3.1\Library.Application.AssemblyInfo.cs
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Application\obj\Debug\netcoreapp3.1\Library.Application.csproj.CopyComplete
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Application\obj\Debug\netcoreapp3.1\Library.Application.dll
+C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Application\obj\Debug\netcoreapp3.1\Library.Application.pdb

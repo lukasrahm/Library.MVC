@@ -41,5 +41,10 @@ namespace Library.Infrastructure.Services
             // Here we are NOT using .Include() so the authors books will NOT be loaded, read more about loading related data at https://docs.microsoft.com/en-us/ef/core/querying/related-data
             return context.BookDetails.OrderBy(x => x.Id).ToList();
         }
+
+        public BookDetails GetBookDetails(int? id)
+        {
+            return context.BookDetails.Find(id);
+        }
     }
 }
