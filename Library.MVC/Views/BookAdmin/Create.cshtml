@@ -1,22 +1,20 @@
-﻿@model Library.MVC.Models.BookEditVm
+﻿@model Library.MVC.Models.BookCreateVm;
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h4>Lägg till ny bok</h4>
 
-<h4>BookDetails</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="ISBN" class="control-label"></label>
                 <input asp-for="ISBN" class="form-control" />
-                <span asp-validation-for="ISBN" class="text-danger"></span>
+                <span asp-validation-for="ISBN" class="jonas-fula-text"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -24,9 +22,11 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AuthorId" class="control-label"></label>
-                <select asp-for="AuthorId" class="form-control" asp-items="Model.SelectAuthorList"></select>
-                <span asp-validation-for="AuthorId" class="text-danger"></span>
+                <label asp-for="Authors" class="control-label"></label>
+                @Html.DropDownListFor(m => m.AuthorId, Model.Authors, "Välj författare")
+                <div>
+                    <a asp-controller="Authors" asp-action="Create">Lägg till ny författare</a>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
@@ -34,14 +34,14 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Gå tillbaka</a>
 </div>
 
 @section Scripts {

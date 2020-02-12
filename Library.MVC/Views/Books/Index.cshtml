@@ -3,11 +3,8 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h1>Index</h1>
+<h1>Böcker</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -20,17 +17,16 @@
         </tr>
     </thead>
     <tbody>
-        @{ 
+        @{
             foreach (var bookDetail in Model.Details)
             {
-                foreach (var book in Model.Books)
+                string shortDescription = new string(bookDetail.Description.Take(50).ToArray()) + "...";
+                int copies = 0;
+                if (bookDetail.Copies != null)
                 {
-                    if (book.DetailsId == bookDetail.Id)
-                    {
-                        bookDetail.Copies++;
-                    }
+                    copies = bookDetail.Copies.Count();
                 }
-                if (bookDetail.Copies != 0)
+                if (copies > 0)
                 {
                     <tr>
                         <td>
@@ -43,18 +39,18 @@
                             @Html.DisplayFor(modelItem => bookDetail.Author.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => bookDetail.Description)
+                            @Html.DisplayFor(modelItem => shortDescription)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => bookDetail.Copies)
+                            @Html.DisplayFor(modelItem => copies)
                         </td>
-                        @*<td>
+                        <td>
                             <a asp-action="Loan" asp-route-id="@bookDetail">Låna</a>
-                        </td>*@
+                        </td>
                     </tr>
                 }
-
             }
+
         }
     </tbody>
 </table>

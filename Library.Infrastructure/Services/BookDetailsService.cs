@@ -9,11 +9,11 @@ using System.Text;
 
 namespace Library.Infrastructure.Services
 {
-    public class NewBookService : IBookDetailsService
+    public class BookDetailsService : IBookDetailsService
     {
         private readonly ApplicationDbContext context;
 
-        public NewBookService(ApplicationDbContext context)
+        public BookDetailsService(ApplicationDbContext context)
         {
             this.context = context;
         }
@@ -24,15 +24,10 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
         }
 
-
         public void UpdateBookDetails(BookDetails book)
         {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateBookDetails(int id, BookDetails book)
-        {
-            throw new NotImplementedException();
+            context.Update(book);
+            context.SaveChanges();
         }
 
 
@@ -45,6 +40,13 @@ namespace Library.Infrastructure.Services
         public BookDetails GetBookDetails(int? id)
         {
             return context.BookDetails.Find(id);
+        }
+
+        public void DeleteBook(BookDetails book)
+        {
+            context.Remove(book);
+            context.SaveChanges();
+
         }
     }
 }

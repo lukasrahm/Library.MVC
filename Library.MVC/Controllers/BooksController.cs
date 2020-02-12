@@ -57,7 +57,7 @@ namespace Library.MVC.Controllers
         // GET: Books/Create
         public IActionResult Create()
         {
-            var vm = new BookCreateVm();
+            var vm = new BookAddVm();
             vm.DetailsList = new SelectList(bookDetailsService.GetAllBookDetails(), "Id", "Title");
             return View(vm);
         }
@@ -67,7 +67,7 @@ namespace Library.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BookCreateVm vm)
+        public async Task<IActionResult> Create(BookAddVm vm)
         {
             if (ModelState.IsValid)
             {

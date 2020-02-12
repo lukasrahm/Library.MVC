@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Library.Domain;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,11 +10,16 @@ namespace Library.MVC.Models
 {
     public class BookCreateVm
     {
-        [Display(Name = "Bokdetaljer")]
-        public SelectList DetailsList { get; set; }
         [Required]
-        public int DetailId { get; set; }
+        public string ISBN { get; set; }
+        [Display(Name = "Titel")]
+        [MaxLength(50)]
+        public string Title { get; set; }
+        [Display(Name = "Författare")]
+        public SelectList Authors { get; set; }
         [Required]
-        public int AmountOfCopies { get; set; }
+        public int AuthorId { get; set; }
+        [Required]
+        public string Description { get; set; }
     }
 }

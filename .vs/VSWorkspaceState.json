@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Library.Application",
+    "\\Library.MVC",
+    "\\Library.MVC\\Controllers",
+    "\\Library.MVC\\Models",
+    "\\Library.MVC\\Views"
+  ],
+  "SelectedNode": "\\Library.Application\\Library.Application.csproj",
+  "PreviewInSolutionExplorer": false
+}

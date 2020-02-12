@@ -1,12 +1,11 @@
-﻿@model Library.MVC.Models.BookCreateVm;
+﻿@model Library.MVC.Models.BookAddVm;
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add";
 }
 
-<h1>Create</h1>
+<h4>Lägg till fler upplagor av en existerande bok</h4>
 
-<h4>BookDetails</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -21,7 +20,7 @@
                 <label asp-for="DetailsList" class="control-label"></label>
                 @Html.DropDownListFor(m => m.DetailId, Model.DetailsList, "Välj bok")
                 <div>
-                    <a asp-controller="NewBooks" asp-action="Create">Lägg till ny bok</a>
+                    <a asp-controller="BookEdit" asp-action="Create">Lägg till ny bok</a>
                 </div>
             </div>
             <div class="form-group">
@@ -32,7 +31,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Gå tillbaka</a>
 </div>
 
 @section Scripts {

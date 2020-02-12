@@ -1,0 +1,42 @@
+﻿@model Library.Domain.BookDetails
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detaljer</h1>
+
+<div>
+    <h4>Book Detaljer</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            ISBN
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ISBN)
+        </dd>
+        <dt class = "col-sm-2">
+            Titel
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            Författare
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Author.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            Beskriving
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Redigera</a> |
+    <a asp-action="Index">Tillbacka</a>
+</div>

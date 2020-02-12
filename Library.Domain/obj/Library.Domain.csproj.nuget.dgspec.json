@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\marcu\\Documents\\GitHub\\Library.MVC\\Library.Domain\\Library.Domain.csproj": {}
+    "C:\\Users\\lukas\\Desktop\\Skola\\Library.MVC\\Library.Domain\\Library.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\marcu\\Documents\\GitHub\\Library.MVC\\Library.Domain\\Library.Domain.csproj": {
+    "C:\\Users\\lukas\\Desktop\\Skola\\Library.MVC\\Library.Domain\\Library.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\marcu\\Documents\\GitHub\\Library.MVC\\Library.Domain\\Library.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\lukas\\Desktop\\Skola\\Library.MVC\\Library.Domain\\Library.Domain.csproj",
         "projectName": "Library.Domain",
-        "projectPath": "C:\\Users\\marcu\\Documents\\GitHub\\Library.MVC\\Library.Domain\\Library.Domain.csproj",
-        "packagesPath": "C:\\Users\\marcu\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\marcu\\Documents\\GitHub\\Library.MVC\\Library.Domain\\obj\\",
+        "projectPath": "C:\\Users\\lukas\\Desktop\\Skola\\Library.MVC\\Library.Domain\\Library.Domain.csproj",
+        "packagesPath": "C:\\Users\\lukas\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\lukas\\Desktop\\Skola\\Library.MVC\\Library.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\marcu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\lukas\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

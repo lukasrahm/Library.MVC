@@ -10,6 +10,6 @@ namespace Library.Domain
         public int AuthorId { get; set; }
         public Author Author { get; set; }
         public string Description { get; set; }
-        public int Copies { get; set; }
+        public IList<Book> Copies { get; set; }
     }
 }

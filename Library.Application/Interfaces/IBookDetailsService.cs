@@ -16,5 +16,15 @@ namespace Library.Application.Interfaces
 
         IList<BookDetails> GetAllBookDetails();
         BookDetails GetBookDetails(int? id);
+
+        /// <summary>
+        /// Updates a book.
+        /// </summary>
+        /// <param name="id">Id of book to update</param>
+        /// <param name="book">New values of book (Id is ignored)</param>
+        void UpdateBookDetails(BookDetails bookDetails);
+
+        
+        void DeleteBook(BookDetails bookDetails);
     }
 }

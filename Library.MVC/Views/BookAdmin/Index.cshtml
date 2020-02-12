@@ -1,0 +1,63 @@
+﻿@model Library.MVC.Models.BookAdminIndexVm;
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4>Administrera bibliotekets tillgångar</h4>
+
+<p>
+    <a asp-action="Create">Lägg till ny bok</a>
+    <br />
+    <a asp-action="Add">Lägg till exemplar av existerande bok</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ISBN</th>
+            <th>Titel</th>
+            <th>Författare</th>
+            <th>Beskrivning</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    <tbody>
+        @foreach (var bookDetail in Model.BookDetails)
+        {
+
+            string shortDescription = new string(bookDetail.Description.Take(50).ToArray()) + "...";
+            int copies = 0;
+            if(bookDetail.Copies != null)
+            {
+                copies = bookDetail.Copies.Count();
+            }
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => bookDetail.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => bookDetail.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => bookDetail.Author.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => shortDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => copies)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@bookDetail.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@bookDetail.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@bookDetail.Id">Delete</a>
+                </td>
+            </tr>
+
+
+        }
+    </tbody>
+
+
+</table>
