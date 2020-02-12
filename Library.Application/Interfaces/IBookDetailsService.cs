@@ -26,5 +26,7 @@ namespace Library.Application.Interfaces
 
         
         void DeleteBook(BookDetails bookDetails);
+
+        IList<Book> GetCopiesById(int? bookDetailId);
     }
 }

@@ -120,6 +120,7 @@ namespace Library.MVC.Controllers
             vm.AuthorId = bookDetails.AuthorId;
             vm.Description = bookDetails.Description;
             vm.Author = authorService.GetAuthorById(bookDetails.AuthorId);
+            vm.Copies = bookDetailsService.GetCopiesById(bookDetails.Id);
             return View(vm);
 
 

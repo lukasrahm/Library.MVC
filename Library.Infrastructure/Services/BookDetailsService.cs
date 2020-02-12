@@ -48,5 +48,10 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
 
         }
+
+        public IList<Book> GetCopiesById(int? detailId)
+        {
+            return context.Books.Where(book => book.DetailsId == detailId).ToList();
+        }
     }
 }

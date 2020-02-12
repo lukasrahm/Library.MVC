@@ -25,12 +25,11 @@
     <tbody>
         @foreach (var bookDetail in Model.BookDetails)
         {
-
             string shortDescription = new string(bookDetail.Description.Take(50).ToArray()) + "...";
             int copies = 0;
-            if(bookDetail.Copies != null)
+            if (bookDetail.Copies != null)
             {
-                copies = bookDetail.Copies.Count();
+                copies = bookDetail.Copies.Count;
             }
             <tr>
                 <td>
