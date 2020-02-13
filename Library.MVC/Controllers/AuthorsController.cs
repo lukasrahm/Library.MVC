@@ -13,18 +13,21 @@ namespace Library.MVC.Controllers
 {
     public class AuthorsController : Controller
     {
-        private readonly IAuthorService authorservice;
+        private readonly IBookDetailsService bookDetailsService;
+        private readonly IAuthorService authorService;
 
-        public AuthorsController(IAuthorService authorservice)
+        public AuthorsController(IBookDetailsService bookDetailsService, IAuthorService authorService)
         {
-            this.authorservice = authorservice;
+
+            this.bookDetailsService = bookDetailsService;
+            this.authorService = authorService;
         }
 
         //GET: Authors
         public async Task<IActionResult> Index()
         {
             var vm = new AuthorIndexVm();
-            vm.Authors = authorservice.GetAllAuthors();
+            vm.Authors = authorService.GetAllAuthors();
             return View(vm);
         }
 
@@ -49,12 +52,29 @@ namespace Library.MVC.Controllers
                 var newAuthor = new Author();
                 newAuthor.Name = vm.Name;
 
-                authorservice.AddAuthor(newAuthor);
+                authorService.AddAuthor(newAuthor);
 
                 return RedirectToAction(nameof(Index));
             }
 
             return RedirectToAction("Error", "Home", "");
+        }
+
+        public async Task<IActionResult> Books(int? Id)
+        {
+
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new AuthorsBooksVm();
+            vm.Books = bookDetailsService.GetBooksByAuthorId(Id);
+            vm.Author = authorService.GetAuthorById(Id);
+
+            return View(vm);
+
+
         }
     }
 }

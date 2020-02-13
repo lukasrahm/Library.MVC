@@ -523,7 +523,6 @@ C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Raz
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Authors\Index.cshtml.g.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Members\Create.cshtml.g.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Members\Index.cshtml.g.cs
-C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Books\Loan.cshtml.g.cs
 C:\Users\marcu\Documents\GitHub\Library.MVC\Library.MVC\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\marcu\Documents\GitHub\Library.MVC\Library.MVC\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\marcu\Documents\GitHub\Library.MVC\Library.MVC\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
@@ -707,3 +706,5 @@ C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Raz
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\BookAdmin\Details.cshtml.g.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\BookAdmin\Edit.cshtml.g.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\BookAdmin\Index.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Loans\Index.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Authors\Books.cshtml.g.cs

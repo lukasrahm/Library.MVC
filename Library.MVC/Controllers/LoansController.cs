@@ -12,23 +12,26 @@ using Library.Infrastructure.Services;
 
 namespace Library.MVC.Controllers
 {
-    public class LoanController : Controller
+    public class LoansController : Controller
     {
+        private readonly ILoanService loanService;
         private readonly IBookService bookService;
         private readonly IMemberService memberService;
 
-        public LoanController(IBookService bookService, IMemberService memberService)
+        public LoansController(ILoanService loanService, IBookService bookService, IMemberService memberService)
         {
+            this.loanService = loanService;
             this.bookService = bookService;
             this.memberService = memberService;
         }
 
-        //GET: Books
+        //GET: Loans
         public async Task<IActionResult> Index()
         {
-            var vm = new BookLoanVm();
-            //vm.BookId = 
-            //vm.MemberSSN
+            var vm = new LoansVm();
+            vm.Loans = loanService.GetAllLoans();
+            vm.Books = bookService.GetAllBooks();
+            vm.Members = memberService.GetAllMembers();
             return View(vm);
         }
 

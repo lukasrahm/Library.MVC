@@ -1,0 +1,43 @@
+﻿@model Library.MVC.Models.LoansVm;
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Boklån</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Medlem</th>
+            <th>Bok</th>
+            <th>Utlånad</th>
+            <th>Returneras</th>
+            <th>Återlämnad</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var loan in Model.Loans)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => loan.Member.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => loan.Book.Details.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => loan.DateOfLoan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => loan.DateOfReturn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => loan.DateReturned)
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

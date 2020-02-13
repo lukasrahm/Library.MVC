@@ -19,17 +19,20 @@
     <tbody>
         @foreach (var item in Model.Authors)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Books)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Redigera</a> |
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Books)
+            </td>
+            <td>
+                <a asp-action="Books" asp-route-id="@item.Id">Visa</a> |
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Redigera</a> |
+            </td>
+        </tr>
         }
     </tbody>
 </table>

@@ -19,6 +19,7 @@ namespace Library.Infrastructure.Persistence
 
         public DbSet<Member> Members { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<Loan> Loans { get; set; }
         public DbSet<BookDetails> BookDetails { get; set; }
         public DbSet<Author> Authors { get; set; }
 
@@ -45,11 +46,17 @@ namespace Library.Infrastructure.Persistence
                 new BookDetails { Id = 3, AuthorId = 2, Title = "Othello", ISBN = "1853260185", Description = "An intense drama of love, deception, jealousy and destruction." }
                 );
             modelBuilder.Entity<Book>().HasData(
-                new Book { Id = 1, DetailsId = 1},
-                new Book { Id = 2, DetailsId = 1},
-                new Book { Id = 3, DetailsId = 1},
-                new Book { Id = 4, DetailsId = 2},
-                new Book { Id = 5, DetailsId = 3}
+                new Book { Id = 1, DetailsId = 1 },
+                new Book { Id = 2, DetailsId = 1 },
+                new Book { Id = 3, DetailsId = 1 },
+                new Book { Id = 4, DetailsId = 2 },
+                new Book { Id = 5, DetailsId = 3 }
+                );
+            modelBuilder.Entity<Member>().HasData(
+                new Member { Id = 1, Name = "Lukas Rahm", SSN = "199801280919" }
+                );
+            modelBuilder.Entity<Loan>().HasData(
+                new Loan { Id = 1, BookId = 1, MemberId = 1, DateOfLoan = DateTime.Today.ToLocalTime(), DateOfReturn = DateTime.Today.ToLocalTime().AddDays(14) }
                 );
         }
 

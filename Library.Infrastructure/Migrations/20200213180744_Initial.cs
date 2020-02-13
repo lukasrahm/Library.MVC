@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Library.Infrastructure.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -74,20 +75,49 @@ namespace Library.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Authors",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "William Shakespeare" });
+            migrationBuilder.CreateTable(
+                name: "Loans",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MemberId = table.Column<int>(nullable: false),
+                    BookId = table.Column<int>(nullable: false),
+                    DateOfLoan = table.Column<DateTime>(nullable: false),
+                    DateOfReturn = table.Column<DateTime>(nullable: false),
+                    DateReturned = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Loans", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Loans_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Loans_Members_MemberId",
+                        column: x => x.MemberId,
+                        principalTable: "Members",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.InsertData(
                 table: "Authors",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 2, "Villiam Skakspjut" });
+                values: new object[,]
+                {
+                    { 1, "William Shakespeare" },
+                    { 2, "Villiam Skakspjut" },
+                    { 3, "Robert C. Martin" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Authors",
-                columns: new[] { "Id", "Name" },
-                values: new object[] { 3, "Robert C. Martin" });
+                table: "Members",
+                columns: new[] { "Id", "Name", "SSN" },
+                values: new object[] { 1, "Lukas Rahm", "199801280919" });
 
             migrationBuilder.InsertData(
                 table: "BookDetails",
@@ -116,6 +146,11 @@ namespace Library.Infrastructure.Migrations
                     { 5, 3 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Loans",
+                columns: new[] { "Id", "BookId", "DateOfLoan", "DateOfReturn", "DateReturned", "MemberId" },
+                values: new object[] { 1, 1, new DateTime(2020, 2, 13, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2020, 2, 27, 0, 0, 0, 0, DateTimeKind.Local), null, 1 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_BookDetails_AuthorId",
                 table: "BookDetails",
@@ -125,10 +160,23 @@ namespace Library.Infrastructure.Migrations
                 name: "IX_Books_DetailsId",
                 table: "Books",
                 column: "DetailsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Loans_BookId",
+                table: "Loans",
+                column: "BookId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Loans_MemberId",
+                table: "Loans",
+                column: "MemberId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Loans");
+
             migrationBuilder.DropTable(
                 name: "Books");
 

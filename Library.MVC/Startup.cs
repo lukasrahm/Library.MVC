@@ -33,6 +33,7 @@ namespace Library.MVC
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IMemberService, MemberService>();
+            services.AddScoped<ILoanService, LoanService>();
 
             // This call injects our applicationDbContext (our implementation of Entity Framework Core)
             services.AddDbContext<ApplicationDbContext>(options =>

@@ -9,53 +9,49 @@ using System.Text;
 
 namespace Library.Infrastructure.Services
 {
-    public class BookDetailsService : IBookDetailsService
+    public class LoanService : ILoanService
     {
         private readonly ApplicationDbContext context;
 
-        public BookDetailsService(ApplicationDbContext context)
+        public LoanService(ApplicationDbContext context)
         {
             this.context = context;
         }
 
-        public void AddNewBook(BookDetails bookdetails)
+        public void AddNewLoan(Loan book)
         {
-            context.Add(bookdetails);
+            context.Add(book);
             context.SaveChanges();
         }
 
-        public void UpdateBookDetails(BookDetails book)
+        public void UpdateLoan(Loan book)
         {
             context.Update(book);
             context.SaveChanges();
         }
 
 
-        public IList<BookDetails> GetAllBookDetails()
+        public IList<Loan> GetAllLoans()
         {
             // Here we are NOT using .Include() so the authors books will NOT be loaded, read more about loading related data at https://docs.microsoft.com/en-us/ef/core/querying/related-data
-            return context.BookDetails.OrderBy(x => x.Id).ToList();
+            return context.Loans.OrderBy(x => x.DateOfLoan).ToList();
         }
 
-        public BookDetails GetBookDetails(int? id)
+        public Loan GetLoan(int? id)
         {
-            return context.BookDetails.Find(id);
+            return context.Loans.Find(id);
         }
 
-        public void DeleteBook(BookDetails book)
+        public void DeleteLoan(Loan book)
         {
             context.Remove(book);
             context.SaveChanges();
 
         }
 
-        public IList<Book> GetCopiesById(int? detailId)
+        public IList<Loan> GetCopiesById(int? detailId)
         {
-            return context.Books.Where(book => book.DetailsId == detailId).ToList();
-        }
-        public IList<BookDetails> GetBooksByAuthorId(int? authorId)
-        {
-            return context.BookDetails.Where(book => book.AuthorId == authorId).ToList();
+            return context.Loans.Where(book => book.Id == detailId).ToList();
         }
     }
 }
