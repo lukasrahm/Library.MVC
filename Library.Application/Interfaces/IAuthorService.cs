@@ -19,5 +19,7 @@ namespace Library.Application.Interfaces
         /// <param name="author"></param>
         void AddAuthor(Author author);
         Author GetAuthorById(int? authorId);
+
+        void UpdateAuthor(Author author);
     }
 }

@@ -13,7 +13,6 @@
     <thead>
         <tr>
             <th>Namn</th>
-            <th>Böcker</th>
         </tr>
     </thead>
     <tbody>
@@ -27,7 +26,7 @@
                 @Html.DisplayFor(modelItem => item.Books)
             </td>
             <td>
-                <a asp-action="Books" asp-route-id="@item.Id">Visa</a> |
+                <a asp-action="Books" asp-route-id="@item.Id">Visa böcker</a> |
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Redigera</a> |

@@ -34,5 +34,11 @@ namespace Library.Infrastructure.Services
         {
             return context.Authors.Find(authorId);
         }
+
+        public void UpdateAuthor(Author author)
+        {
+            context.Update(author);
+            context.SaveChanges();
+        }
     }
 }

@@ -4,14 +4,16 @@ using Library.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Library.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200216131011_MigrationDateChange")]
+    partial class MigrationDateChange
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,9 +64,6 @@ namespace Library.Infrastructure.Migrations
                     b.Property<int>("DetailsId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("OnLoan")
-                        .HasColumnType("bit");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DetailsId");
@@ -75,32 +74,27 @@ namespace Library.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DetailsId = 1,
-                            OnLoan = false
+                            DetailsId = 1
                         },
                         new
                         {
                             Id = 2,
-                            DetailsId = 1,
-                            OnLoan = false
+                            DetailsId = 1
                         },
                         new
                         {
                             Id = 3,
-                            DetailsId = 1,
-                            OnLoan = false
+                            DetailsId = 1
                         },
                         new
                         {
                             Id = 4,
-                            DetailsId = 2,
-                            OnLoan = false
+                            DetailsId = 2
                         },
                         new
                         {
                             Id = 5,
-                            DetailsId = 3,
-                            OnLoan = false
+                            DetailsId = 3
                         });
                 });
 
@@ -250,7 +244,7 @@ namespace Library.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("Library.Domain.Member", "Member")
-                        .WithMany("Loans")
+                        .WithMany()
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

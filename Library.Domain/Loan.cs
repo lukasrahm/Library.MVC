@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Library.Domain
 {
@@ -13,8 +14,17 @@ namespace Library.Domain
         public int BookId { get; set; }
         public Book Book { get; set; }
 
+
+        [DataType(DataType.Date)]
+        [Column(TypeName = "Date")]
         public DateTime DateOfLoan { get; set; }
+
+        [DataType(DataType.Date)]
+        [Column(TypeName = "Date")]
         public DateTime DateOfReturn { get; set; }
+
+        [DataType(DataType.Date)]
+        [Column(TypeName = "Date")]
         public DateTime? DateReturned { get; set; }
     }
 }

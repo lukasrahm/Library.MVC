@@ -35,27 +35,9 @@ namespace Library.MVC.Controllers
             return View(vm);
         }
 
-        //// GET: Books/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    var bookDetails = await _context.BookDetails
-        //        .Include(b => b.Author)
-        //        .FirstOrDefaultAsync(m => m.ID == id);
-        //    if (bookDetails == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(bookDetails);
-        //}
-
-        // GET: Books/Create
-        public IActionResult Create()
+        // GET: Loans/Make
+        public IActionResult Make()
         {
             var vm = new BookCreateVm();
             //vm.DetailsList = new SelectList(bookDetailsService.GetAllBookDetails(), "Id", "Title");

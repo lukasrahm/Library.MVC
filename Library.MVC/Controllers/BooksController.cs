@@ -35,30 +35,21 @@ namespace Library.MVC.Controllers
             return View(vm);
         }
 
-        //// GET: Books/Details/5
-        //public async Task<IActionResult> Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var bookDetails = await _context.BookDetails
-        //        .Include(b => b.Author)
-        //        .FirstOrDefaultAsync(m => m.ID == id);
-        //    if (bookDetails == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(bookDetails);
-        //}
+        //GET: Books
+        public async Task<IActionResult> Admin()
+        {
+            var vm = new BookIndexVm();
+            vm.Details = bookDetailsService.GetAllBookDetails();
+            vm.Authors = authorService.GetAllAuthors();
+            vm.Books = bookService.GetAllBooks();
+            return View(vm);
+        }
 
         // GET: Books/Create
         public IActionResult Create()
         {
-            var vm = new BookAddVm();
-            vm.DetailsList = new SelectList(bookDetailsService.GetAllBookDetails(), "Id", "Title");
+            var vm = new BookCreateVm();
+            vm.Authors = new SelectList(authorService.GetAllAuthors(), "Id", "Name");
             return View(vm);
         }
 
@@ -67,7 +58,38 @@ namespace Library.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BookAddVm vm)
+        public async Task<IActionResult> Create(BookCreateVm vm)
+        {
+            if (ModelState.IsValid)
+            {
+                //Create
+                var newBook = new BookDetails();
+                newBook.AuthorId = vm.AuthorId;
+                newBook.Description = vm.Description;
+                newBook.ISBN = vm.ISBN;
+                newBook.Title = vm.Title;
+
+                bookDetailsService.AddNewBook(newBook);
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction("Error", "Home", "");
+        }
+
+        public IActionResult Add()
+        {
+            var vm = new BookAddVm();
+            vm.DetailsList = new SelectList(bookDetailsService.GetAllBookDetails(), "Id", "Title");
+            return View(vm);
+        }
+
+        // POST: Books/Add
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Add(BookAddVm vm)
         {
             if (ModelState.IsValid)
             {
@@ -87,92 +109,128 @@ namespace Library.MVC.Controllers
             return RedirectToAction("Error", "Home", "");
         }
 
-        //// GET: Books/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    var bookDetails = await _context.BookDetails.FindAsync(id);
-        //    if (bookDetails == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    ViewData["AuthorID"] = new SelectList(_context.Authors, "Id", "Id", bookDetails.AuthorID);
-        //    return View(bookDetails);
-        //}
+        // GET: Books/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
 
-        //// POST: Books/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("ID,ISBN,Title,AuthorID,Description")] BookDetails bookDetails)
-        //{
-        //    if (id != bookDetails.ID)
-        //    {
-        //        return NotFound();
-        //    }
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(bookDetails);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!BookDetailsExists(bookDetails.ID))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["AuthorID"] = new SelectList(_context.Authors, "Id", "Id", bookDetails.AuthorID);
-        //    return View(bookDetails);
-        //}
+            var bookDetails = bookDetailsService.GetBookDetails(id);
+            if (bookDetails == null)
+            {
+                return NotFound();
+            }
 
-        //// GET: Books/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var vm = new BookDetails();
+            vm.Id = bookDetails.Id;
+            vm.ISBN = bookDetails.ISBN;
+            vm.Title = bookDetails.Title;
+            vm.AuthorId = bookDetails.AuthorId;
+            vm.Description = bookDetails.Description;
+            vm.Author = authorService.GetAuthorById(bookDetails.AuthorId);
+            vm.Copies = bookDetailsService.GetCopiesById(bookDetails.Id);
+            return View(vm);
 
-        //    var bookDetails = await _context.BookDetails
-        //        .Include(b => b.Author)
-        //        .FirstOrDefaultAsync(m => m.ID == id);
-        //    if (bookDetails == null)
-        //    {
-        //        return NotFound();
-        //    }
 
-        //    return View(bookDetails);
-        //}
+        }
 
-        //// POST: Books/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var bookDetails = await _context.BookDetails.FindAsync(id);
-        //    _context.BookDetails.Remove(bookDetails);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+        // GET: Books/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
 
-        //private bool BookDetailsExists(int id)
-        //{
-        //    return _context.BookDetails.Any(e => e.ID == id);
-        //}
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var bookDetails = bookDetailsService.GetBookDetails(id);
+            if (bookDetails == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new BookEditVm();
+            vm.Id = bookDetails.Id;
+            vm.ISBN = bookDetails.ISBN;
+            vm.Title = bookDetails.Title;
+            vm.AuthorId = bookDetails.AuthorId;
+            vm.Description = bookDetails.Description;
+            vm.Authors = new SelectList(authorService.GetAllAuthors(), nameof(Author.Id), nameof(Author.Name), bookDetails.AuthorId);
+            return View(vm);
+
+        }
+
+        // POST: Books/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ISBN,Title,AuthorId,Description")] BookDetails bookDetails)
+        {
+
+            if (id != bookDetails.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    bookDetailsService.UpdateBookDetails(bookDetails);
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (id != bookDetails.Id)
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(bookDetails);
+
+        }
+
+        // GET: Books/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var bookDetails = bookDetailsService.GetBookDetails(id);
+            if (bookDetails == null)
+            {
+                return NotFound();
+            }
+
+            return View(bookDetails);
+
+        }
+
+        // POST: Books/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(BookDetails bookDetails)
+        {
+
+            bookDetailsService.DeleteBook(bookDetails);
+
+
+            return RedirectToAction(nameof(Index));
+
+        }
     }
 }

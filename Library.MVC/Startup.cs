@@ -66,7 +66,7 @@ namespace Library.MVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Books}/{action=Index}/{id?}");
             });
         }
     }
