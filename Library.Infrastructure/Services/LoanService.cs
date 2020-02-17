@@ -24,12 +24,6 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
         }
 
-        public void UpdateLoan(Loan book)
-        {
-            context.Update(book);
-            context.SaveChanges();
-        }
-
 
         public IList<Loan> GetAllLoans()
         {
@@ -42,16 +36,13 @@ namespace Library.Infrastructure.Services
             return context.Loans.Find(id);
         }
 
-        public void DeleteLoan(Loan book)
+        public void DeleteLoan(Loan loan)
         {
-            context.Remove(book);
+            context.Remove(loan);
             context.SaveChanges();
 
         }
 
-        public IList<Loan> GetCopiesById(int? detailId)
-        {
-            return context.Loans.Where(book => book.Id == detailId).ToList();
-        }
+
     }
 }

@@ -8,6 +8,7 @@ namespace Library.Domain
         public int DetailsId { get; set; }
         public BookDetails Details { get; set; }
 
-        public bool OnLoan { get; set; }
+        public int? LoanId { get; set; }
+        public Loan Loan { get; set; }
     }
 }

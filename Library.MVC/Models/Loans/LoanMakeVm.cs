@@ -16,19 +16,13 @@ namespace Library.MVC.Models
         [Display(Name = "Medlemmar")]
         public SelectList Members { get; set; }
 
-        [Required]
-        public int BookId { get; set; }
-        public Book Book { get; set; }
-
         public BookDetails Details { get; set; }
 
 
-        [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         public DateTime DateOfLoan { get; set; }
         
-        [Required]
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         public DateTime DateOfReturn { get; set; }

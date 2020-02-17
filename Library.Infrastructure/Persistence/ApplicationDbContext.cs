@@ -25,8 +25,12 @@ namespace Library.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            ConfigureBookDetails(modelBuilder);
+            ConfigureMember(modelBuilder);
             ConfigureAuthor(modelBuilder);
+            ConfigureBookDetails(modelBuilder);
+            ConfigureBook(modelBuilder);
+            //ConfigureLoan(modelBuilder);
+
 
             SeedDatabase(modelBuilder);
 
@@ -65,6 +69,19 @@ namespace Library.Infrastructure.Persistence
             modelBuilder.Entity<Author>().Property(x => x.Name).HasMaxLength(55);
         }
 
+
+        private static void ConfigureBook(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Book>().HasKey(x => x.Id);
+            modelBuilder.Entity<Book>()
+                .HasOne(b => b.Details)
+                .WithMany(a => a.Copies)
+                .HasForeignKey(b => b.DetailsId);
+            modelBuilder.Entity<Book>()
+                .HasOne(b => b.Loan)
+                .WithOne(a => a.Book)
+                .HasForeignKey<Loan>(b => b.BookId);
+        }
         private static void ConfigureBookDetails(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<BookDetails>().HasKey(x => x.Id);
@@ -73,5 +90,25 @@ namespace Library.Infrastructure.Persistence
                 .WithMany(a => a.Books)
                 .HasForeignKey(b => b.AuthorId);
         }
+
+        //private static void ConfigureLoan(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Loan>().HasKey(x => x.Id);
+        //    modelBuilder.Entity<Loan>()
+        //        .HasOne(b => b.Member)
+        //        .WithMany(a => a.Loans)
+        //        .HasForeignKey(b => b.MemberId);
+        //    modelBuilder.Entity<Loan>()
+        //        .HasOne(b => b.Book)
+        //        .WithOne(a => a.Loan)
+        //        .HasForeignKey<Book>(b => b.LoanId);
+        //}
+
+        private static void ConfigureMember(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Member>().HasKey(x => x.Id);
+        }
+
+
     }
 }

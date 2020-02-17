@@ -312,7 +312,6 @@ C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\bin\Debug\netcoreapp3.1\Lib
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.csprojAssemblyReference.cache
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\staticwebassets\Library.MVC.StaticWebAssets.Manifest.cache
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\staticwebassets\Library.MVC.StaticWebAssets.xml
-C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.RazorAssemblyInfo.cache
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.RazorAssemblyInfo.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.AssemblyInfoInputs.cache
@@ -712,3 +711,5 @@ C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Raz
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Members\Edit.cshtml.g.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Books\Make.cshtml.g.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Loans\Make.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Logging.Debug.dll

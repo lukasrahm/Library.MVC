@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Library.Infrastructure.Migrations
 {
-    public partial class Initial : Migration
+    public partial class intialize : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -62,7 +62,8 @@ namespace Library.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DetailsId = table.Column<int>(nullable: false)
+                    DetailsId = table.Column<int>(nullable: false),
+                    LoanId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -83,9 +84,9 @@ namespace Library.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MemberId = table.Column<int>(nullable: false),
                     BookId = table.Column<int>(nullable: false),
-                    DateOfLoan = table.Column<DateTime>(nullable: false),
-                    DateOfReturn = table.Column<DateTime>(nullable: false),
-                    DateReturned = table.Column<DateTime>(nullable: true)
+                    DateOfLoan = table.Column<DateTime>(type: "Date", nullable: false),
+                    DateOfReturn = table.Column<DateTime>(type: "Date", nullable: false),
+                    DateReturned = table.Column<DateTime>(type: "Date", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -136,20 +137,20 @@ namespace Library.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Books",
-                columns: new[] { "Id", "DetailsId" },
+                columns: new[] { "Id", "DetailsId", "LoanId" },
                 values: new object[,]
                 {
-                    { 1, 1 },
-                    { 2, 1 },
-                    { 3, 1 },
-                    { 4, 2 },
-                    { 5, 3 }
+                    { 1, 1, null },
+                    { 2, 1, null },
+                    { 3, 1, null },
+                    { 4, 2, null },
+                    { 5, 3, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Loans",
                 columns: new[] { "Id", "BookId", "DateOfLoan", "DateOfReturn", "DateReturned", "MemberId" },
-                values: new object[] { 1, 1, new DateTime(2020, 2, 13, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2020, 2, 27, 0, 0, 0, 0, DateTimeKind.Local), null, 1 });
+                values: new object[] { 1, 1, new DateTime(2020, 2, 17, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Local), null, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_BookDetails_AuthorId",
@@ -164,7 +165,8 @@ namespace Library.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Loans_BookId",
                 table: "Loans",
-                column: "BookId");
+                column: "BookId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Loans_MemberId",

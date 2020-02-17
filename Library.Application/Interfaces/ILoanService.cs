@@ -14,16 +14,7 @@ namespace Library.Application.Interfaces
         IList<Loan> GetAllLoans();
         Loan GetLoan(int? id);
 
-        /// <summary>
-        /// Updates a loan.
-        /// </summary>
-        /// <param name="id">Id of loan to update</param>
-        /// <param name="loan">New values of loan (Id is ignored)</param>
-        void UpdateLoan(Loan loan);
-
         
         void DeleteLoan(Loan loan);
-
-        IList<Loan> GetCopiesById(int? loanDetailId);
     }
 }

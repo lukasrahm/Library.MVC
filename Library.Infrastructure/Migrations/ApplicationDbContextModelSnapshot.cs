@@ -62,8 +62,8 @@ namespace Library.Infrastructure.Migrations
                     b.Property<int>("DetailsId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("OnLoan")
-                        .HasColumnType("bit");
+                    b.Property<int?>("LoanId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -75,32 +75,27 @@ namespace Library.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DetailsId = 1,
-                            OnLoan = false
+                            DetailsId = 1
                         },
                         new
                         {
                             Id = 2,
-                            DetailsId = 1,
-                            OnLoan = false
+                            DetailsId = 1
                         },
                         new
                         {
                             Id = 3,
-                            DetailsId = 1,
-                            OnLoan = false
+                            DetailsId = 1
                         },
                         new
                         {
                             Id = 4,
-                            DetailsId = 2,
-                            OnLoan = false
+                            DetailsId = 2
                         },
                         new
                         {
                             Id = 5,
-                            DetailsId = 3,
-                            OnLoan = false
+                            DetailsId = 3
                         });
                 });
 
@@ -180,7 +175,8 @@ namespace Library.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId");
+                    b.HasIndex("BookId")
+                        .IsUnique();
 
                     b.HasIndex("MemberId");
 
@@ -191,8 +187,8 @@ namespace Library.Infrastructure.Migrations
                         {
                             Id = 1,
                             BookId = 1,
-                            DateOfLoan = new DateTime(2020, 2, 16, 0, 0, 0, 0, DateTimeKind.Local),
-                            DateOfReturn = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateOfLoan = new DateTime(2020, 2, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateOfReturn = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Local),
                             MemberId = 1
                         });
                 });
@@ -244,8 +240,8 @@ namespace Library.Infrastructure.Migrations
             modelBuilder.Entity("Library.Domain.Loan", b =>
                 {
                     b.HasOne("Library.Domain.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
+                        .WithOne("Loan")
+                        .HasForeignKey("Library.Domain.Loan", "BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

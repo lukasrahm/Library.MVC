@@ -1,38 +1,40 @@
 ﻿@model Library.MVC.Models.LoanMakeVm
+
 @{
     ViewData["Title"] = "Loan";
 }
 
-<div>
-    <h4>Låna bok</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            ISBN
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Book.Details.Title)
-        </dd>
-        <dt class="col-sm-2">
-            Titel
-        </dt>
-        <dd class="col-sm-10">
-            @*@Html.DisplayFor(model => model.MemberId)*@
-        </dd>
-        <dt class="col-sm-2">
-            Författare
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DateOfLoan)
-        </dd>
-        <dt class="col-sm-2">
-            Beskriving
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DateOfReturn)
-        </dd>
-    </dl>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Make">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <h4>@Html.DisplayFor(model => model.Details.Title)</h4>
+            </div>
+            <div class="form-group">
+                <span asp-validation-for="MemberId" class="text-danger"></span>
+                <select asp-for="MemberId" class="form-control" asp-items="Model.Members"></select>
+                <div>
+                    <a asp-controller="Members" asp-action="Create">Registrera medlem</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <b>Datum vid utlånande: </b>
+                @Html.DisplayFor(model => model.DateOfLoan)
+            </div>
+            <div class="form-group">
+                <b>Returneras senast: </b>
+                @Html.DisplayFor(model => model.DateOfReturn)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
 </div>
+
 <div>
-    <a asp-controller="Books" asp-action="Index">Tillbaka</a>
+    <a asp-controller="Books" asp-action="Index" class="btn btn-danger">Tillbaka</a>
 </div>
+

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Library.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200216131011_MigrationDateChange")]
-    partial class MigrationDateChange
+    [Migration("20200217191951_intialize")]
+    partial class intialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,9 @@ namespace Library.Infrastructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("DetailsId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LoanId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -174,7 +177,8 @@ namespace Library.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId");
+                    b.HasIndex("BookId")
+                        .IsUnique();
 
                     b.HasIndex("MemberId");
 
@@ -185,8 +189,8 @@ namespace Library.Infrastructure.Migrations
                         {
                             Id = 1,
                             BookId = 1,
-                            DateOfLoan = new DateTime(2020, 2, 16, 0, 0, 0, 0, DateTimeKind.Local),
-                            DateOfReturn = new DateTime(2020, 3, 1, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateOfLoan = new DateTime(2020, 2, 17, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateOfReturn = new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Local),
                             MemberId = 1
                         });
                 });
@@ -238,13 +242,13 @@ namespace Library.Infrastructure.Migrations
             modelBuilder.Entity("Library.Domain.Loan", b =>
                 {
                     b.HasOne("Library.Domain.Book", "Book")
-                        .WithMany()
-                        .HasForeignKey("BookId")
+                        .WithOne("Loan")
+                        .HasForeignKey("Library.Domain.Loan", "BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Library.Domain.Member", "Member")
-                        .WithMany()
+                        .WithMany("Loans")
                         .HasForeignKey("MemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
