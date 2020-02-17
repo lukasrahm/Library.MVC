@@ -30,5 +30,9 @@ namespace Library.Application.Interfaces
         /// </summary>
         /// <returns>list of members</returns>
         ICollection<Member> GetAllMembers();
+
+        public Member GetMemberById(int? id);
+
+        void UpdateMember(Member member);
     }
 }

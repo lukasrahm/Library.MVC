@@ -17,12 +17,16 @@ namespace Library.MVC.Controllers
         private readonly IBookService bookService;
         private readonly IBookDetailsService bookDetailsService;
         private readonly IAuthorService authorService;
+        private readonly ILoanService loanService;
+        private readonly IMemberService memberService;
 
-        public BooksController(IBookService bookService, IBookDetailsService bookDetailsService, IAuthorService authorService)
+        public BooksController(IBookService bookService, IBookDetailsService bookDetailsService, IAuthorService authorService, ILoanService loanService, IMemberService memberService)
         {
             this.bookService = bookService;
             this.bookDetailsService = bookDetailsService;
             this.authorService = authorService;
+            this.loanService = loanService;
+            this.memberService = memberService;
         }
 
         //GET: Books
@@ -138,7 +142,7 @@ namespace Library.MVC.Controllers
 
         }
 
-        // GET: Books/Edit/5
+        // GET: Books/Edit/Id
         public async Task<IActionResult> Edit(int? id)
         {
 

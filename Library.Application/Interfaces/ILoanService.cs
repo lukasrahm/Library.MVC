@@ -9,7 +9,7 @@ namespace Library.Application.Interfaces
         /// Adds the loan to DB
         /// </summary>
         /// <param name="loan"></param>
-        void AddNewLoan(Loan loan);
+        void AddLoan(Loan loan);
 
         IList<Loan> GetAllLoans();
         Loan GetLoan(int? id);

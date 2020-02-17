@@ -24,10 +24,16 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
         }
 
-        public ICollection<Book> GetAllBooks()
+        public IList<Book> GetAllBooks()
         {
             // Here we are using .Include() to eager load the author, read more about loading related data at https://docs.microsoft.com/en-us/ef/core/querying/related-data
             return context.Books.Include(x => x.Details.Author).OrderBy(x => x.Details.Id).ToList();
+        }
+
+        public void LoanBook(Book book)
+        {
+            context.Update(book);
+            context.SaveChanges();
         }
 
         public void UpdateBooks(Book book)

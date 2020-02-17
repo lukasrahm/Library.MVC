@@ -1,7 +1,7 @@
 ﻿@model Library.MVC.Models.BookIndexVm;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Admin";
 }
 
 <h4>Administrera bibliotekets tillgångar</h4>
@@ -48,9 +48,9 @@
                 @Html.DisplayFor(modelItem => copies)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@bookDetail.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@bookDetail.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@bookDetail.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@bookDetail.Id">Redigera</a> |
+                <a asp-action="Details" asp-route-id="@bookDetail.Id">Detaljer</a> |
+                <a asp-action="Delete" asp-route-id="@bookDetail.Id">Ta bort</a>
             </td>
         </tr>
 

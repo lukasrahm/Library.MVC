@@ -39,5 +39,16 @@ namespace Library.Infrastructure.Services
         {
             throw new NotImplementedException();
         }
+
+        public Member GetMemberById(int? id)
+        {
+            return context.Members.Find(id);
+        }
+
+        public void UpdateMember(Member member)
+        {
+            context.Update(member);
+            context.SaveChanges();
+        }
     }
 }

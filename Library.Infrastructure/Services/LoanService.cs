@@ -18,9 +18,9 @@ namespace Library.Infrastructure.Services
             this.context = context;
         }
 
-        public void AddNewLoan(Loan book)
+        public void AddLoan(Loan loan)
         {
-            context.Add(book);
+            context.Add(loan);
             context.SaveChanges();
         }
 

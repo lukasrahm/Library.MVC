@@ -45,7 +45,8 @@
                             @Html.DisplayFor(modelItem => copies)
                         </td>
                         <td>
-                            <a asp-action="Loan" asp-route-id="@bookDetail.Id">Låna</a>
+                            <a asp-action="Details" asp-route-id="@bookDetail.Id">Detaljer</a> |
+                            <a asp-controller="Loans" asp-action="Make" asp-route-id="@bookDetail.Id">Låna</a>
                         </td>
                     </tr>
                 }

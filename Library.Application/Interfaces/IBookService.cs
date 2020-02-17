@@ -19,10 +19,12 @@ namespace Library.Application.Interfaces
         /// <param name="book"></param>
         void UpdateBooks(Book book);
 
+        void LoanBook(Book book);
+
         /// <summary>
         /// Gets all books from the database
         /// </summary>
         /// <returns>list of books</returns>
-        ICollection<Book> GetAllBooks();
+        IList<Book> GetAllBooks();
     }
 }

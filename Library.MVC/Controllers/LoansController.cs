@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Library.Domain;
 using Library.MVC.Models;
 using Library.Application.Interfaces;
-using Library.Infrastructure.Services;
 
 namespace Library.MVC.Controllers
 {
@@ -17,12 +12,14 @@ namespace Library.MVC.Controllers
         private readonly ILoanService loanService;
         private readonly IBookService bookService;
         private readonly IMemberService memberService;
+        private readonly IBookDetailsService detailsService;
 
-        public LoansController(ILoanService loanService, IBookService bookService, IMemberService memberService)
+        public LoansController(ILoanService loanService, IBookService bookService, IMemberService memberService, IBookDetailsService detailsService)
         {
             this.loanService = loanService;
             this.bookService = bookService;
             this.memberService = memberService;
+            this.detailsService = detailsService;
         }
 
         //GET: Loans
@@ -37,124 +34,47 @@ namespace Library.MVC.Controllers
 
 
         // GET: Loans/Make
-        public IActionResult Make()
+        public async Task<IActionResult> Make(int? id)
         {
-            var vm = new BookCreateVm();
-            //vm.DetailsList = new SelectList(bookDetailsService.GetAllBookDetails(), "Id", "Title");
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var book = detailsService.GetBookDetails(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new LoanMakeVm();
+            vm.Members = new SelectList(memberService.GetAllMembers(), "Id", "Name");
             return View(vm);
         }
 
-        // POST: Books/Create
+        // POST: Loans/Make
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(BookAddVm vm)
+        public async Task<IActionResult> Make(LoanMakeVm vm)
         {
             if (ModelState.IsValid)
             {
-                for (int i = 0; i < vm.AmountOfCopies; i++)
-                {
-                    //Skapa ny bok
-                    var addBook = new Book();
 
-                    addBook.DetailsId = vm.DetailId;
-                    bookService.AddBook(addBook);
+                var newLoan = new Loan();
+                newLoan.BookId = vm.BookId;
+                newLoan.MemberId = vm.MemberId;
+                newLoan.DateOfLoan = vm.DateOfLoan;
+                newLoan.DateOfReturn = vm.DateOfReturn;
 
-                }
+                loanService.AddLoan(newLoan);
+
 
                 return RedirectToAction(nameof(Index));
             }
 
             return RedirectToAction("Error", "Home", "");
         }
-
-        //// GET: Books/Edit/5
-        //public async Task<IActionResult> Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var bookDetails = await _context.BookDetails.FindAsync(id);
-        //    if (bookDetails == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    ViewData["AuthorID"] = new SelectList(_context.Authors, "Id", "Id", bookDetails.AuthorID);
-        //    return View(bookDetails);
-        //}
-
-        //// POST: Books/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, [Bind("ID,ISBN,Title,AuthorID,Description")] BookDetails bookDetails)
-        //{
-        //    if (id != bookDetails.ID)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            _context.Update(bookDetails);
-        //            await _context.SaveChangesAsync();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {
-        //            if (!BookDetailsExists(bookDetails.ID))
-        //            {
-        //                return NotFound();
-        //            }
-        //            else
-        //            {
-        //                throw;
-        //            }
-        //        }
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["AuthorID"] = new SelectList(_context.Authors, "Id", "Id", bookDetails.AuthorID);
-        //    return View(bookDetails);
-        //}
-
-        //// GET: Books/Delete/5
-        //public async Task<IActionResult> Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var bookDetails = await _context.BookDetails
-        //        .Include(b => b.Author)
-        //        .FirstOrDefaultAsync(m => m.ID == id);
-        //    if (bookDetails == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return View(bookDetails);
-        //}
-
-        //// POST: Books/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(int id)
-        //{
-        //    var bookDetails = await _context.BookDetails.FindAsync(id);
-        //    _context.BookDetails.Remove(bookDetails);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
-
-        //private bool BookDetailsExists(int id)
-        //{
-        //    return _context.BookDetails.Any(e => e.ID == id);
-        //}
     }
 }

@@ -1,49 +1,38 @@
-﻿@model Library.MVC.Models.LoanMakeVm;
-
+﻿@model Library.MVC.Models.LoanMakeVm
 @{
     ViewData["Title"] = "Loan";
 }
 
-<h4>Låna bok</h4>
-
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ISBN" class="control-label"></label>
-                <input asp-for="ISBN" class="form-control" />
-                <span asp-validation-for="ISBN" class="jonas-fula-text"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Authors" class="control-label"></label>
-                @Html.DropDownListFor(m => m.AuthorId, Model.Authors, "Välj författare")
-                <div>
-                    <a asp-controller="Authors" asp-action="Create">Lägg till ny författare</a>
-                </div>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
 <div>
-    <a asp-action="Index">Gå tillbaka</a>
+    <h4>Låna bok</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            ISBN
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Book.Details.Title)
+        </dd>
+        <dt class="col-sm-2">
+            Titel
+        </dt>
+        <dd class="col-sm-10">
+            @*@Html.DisplayFor(model => model.MemberId)*@
+        </dd>
+        <dt class="col-sm-2">
+            Författare
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateOfLoan)
+        </dd>
+        <dt class="col-sm-2">
+            Beskriving
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateOfReturn)
+        </dd>
+    </dl>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<div>
+    <a asp-controller="Books" asp-action="Index">Tillbaka</a>
+</div>

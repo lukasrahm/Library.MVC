@@ -700,7 +700,6 @@ C:\Users\marcu\Documents\GitHub\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\
 C:\Users\marcu\Documents\GitHub\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.pdb
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Loans\Index.cshtml.g.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Authors\Books.cshtml.g.cs
-C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Loans\Make.cshtml.g.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Books\Add.cshtml.g.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Books\Admin.cshtml.g.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Books\Create.cshtml.g.cs
@@ -709,3 +708,7 @@ C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Raz
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Books\Edit.cshtml.g.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Books\Index.cshtml.g.cs
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Authors\Edit.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Members\Details.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Members\Edit.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Books\Make.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Loans\Make.cshtml.g.cs
