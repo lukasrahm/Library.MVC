@@ -28,7 +28,7 @@ namespace Library.Infrastructure.Services
         public IList<Loan> GetAllLoans()
         {
             // Here we are NOT using .Include() so the authors books will NOT be loaded, read more about loading related data at https://docs.microsoft.com/en-us/ef/core/querying/related-data
-            return context.Loans.OrderBy(x => x.DateOfLoan).ToList();
+            return context.Loans.OrderBy(x => x.Id).Include(x => x.Book).ThenInclude(x => x.Details).ToList();
         }
 
         public Loan GetLoan(int? id)

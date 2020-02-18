@@ -52,7 +52,6 @@ namespace Library.MVC.Controllers
 
             vm.Members = new SelectList(memberService.GetAllMembers(), "Id", "Name");
             vm.Details = book;
-            vm.Details.Copies = detailsService.GetCopiesById(book.Id);
             vm.DateOfLoan = DateTime.Today.ToLocalTime();
             vm.DateOfReturn = DateTime.Today.ToLocalTime().AddDays(14);
 
@@ -64,16 +63,30 @@ namespace Library.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public async Task<IActionResult> Make([Bind("MemberId,BookId,DateOfLoan,DateOfReturn")] Loan loan)
+        public async Task<IActionResult> Make(int id, LoanMakeVm vm)
         {
             if (ModelState.IsValid)
             {
-                    loanService.AddLoan(loan);
+                var book = detailsService.GetBookDetails(id);
+                Loan loan = new Loan();
+
+                foreach (var copy in book.Copies)
+                {
+                    if (!copy.OnLoan)
+                    {
+                        loan.BookId = copy.Id;
+                    }
+                }
+
+                loan.DateOfLoan = DateTime.Today.ToLocalTime();
+                loan.DateOfReturn = DateTime.Today.ToLocalTime().AddDays(14);
+                loan.MemberId = vm.MemberId;
+                loanService.AddLoan(loan);
 
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(loan);
+            return View(vm);
         }
     }
 }

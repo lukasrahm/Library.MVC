@@ -29,7 +29,7 @@ namespace Library.Infrastructure.Persistence
             ConfigureAuthor(modelBuilder);
             ConfigureBookDetails(modelBuilder);
             ConfigureBook(modelBuilder);
-            //ConfigureLoan(modelBuilder);
+            ConfigureLoan(modelBuilder);
 
 
             SeedDatabase(modelBuilder);
@@ -77,10 +77,6 @@ namespace Library.Infrastructure.Persistence
                 .HasOne(b => b.Details)
                 .WithMany(a => a.Copies)
                 .HasForeignKey(b => b.DetailsId);
-            modelBuilder.Entity<Book>()
-                .HasOne(b => b.Loan)
-                .WithOne(a => a.Book)
-                .HasForeignKey<Loan>(b => b.BookId);
         }
         private static void ConfigureBookDetails(ModelBuilder modelBuilder)
         {
@@ -91,18 +87,14 @@ namespace Library.Infrastructure.Persistence
                 .HasForeignKey(b => b.AuthorId);
         }
 
-        //private static void ConfigureLoan(ModelBuilder modelBuilder)
-        //{
-        //    modelBuilder.Entity<Loan>().HasKey(x => x.Id);
-        //    modelBuilder.Entity<Loan>()
-        //        .HasOne(b => b.Member)
-        //        .WithMany(a => a.Loans)
-        //        .HasForeignKey(b => b.MemberId);
-        //    modelBuilder.Entity<Loan>()
-        //        .HasOne(b => b.Book)
-        //        .WithOne(a => a.Loan)
-        //        .HasForeignKey<Book>(b => b.LoanId);
-        //}
+        private static void ConfigureLoan(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Loan>().HasKey(x => x.Id);
+            modelBuilder.Entity<Loan>()
+                .HasOne(b => b.Member)
+                .WithMany(a => a.Loans)
+                .HasForeignKey(b => b.MemberId);
+        }
 
         private static void ConfigureMember(ModelBuilder modelBuilder)
         {

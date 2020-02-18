@@ -18,11 +18,10 @@ namespace Library.MVC.Models
 
         public BookDetails Details { get; set; }
 
-
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         public DateTime DateOfLoan { get; set; }
-        
+
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]
         public DateTime DateOfReturn { get; set; }

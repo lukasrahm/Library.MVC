@@ -34,7 +34,6 @@ namespace Library.MVC.Controllers
         {
             var vm = new BookIndexVm();
             vm.Details = bookDetailsService.GetAllBookDetails();
-            vm.Authors = authorService.GetAllAuthors();
             vm.Books = bookService.GetAllBooks();
             return View(vm);
         }
@@ -44,7 +43,6 @@ namespace Library.MVC.Controllers
         {
             var vm = new BookIndexVm();
             vm.Details = bookDetailsService.GetAllBookDetails();
-            vm.Authors = authorService.GetAllAuthors();
             vm.Books = bookService.GetAllBooks();
             return View(vm);
         }

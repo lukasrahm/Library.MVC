@@ -34,12 +34,15 @@ namespace Library.Infrastructure.Services
         public IList<BookDetails> GetAllBookDetails()
         {
             // Here we are NOT using .Include() so the authors books will NOT be loaded, read more about loading related data at https://docs.microsoft.com/en-us/ef/core/querying/related-data
-            return context.BookDetails.OrderBy(x => x.Id).ToList();
+            return context.BookDetails.OrderBy(x => x.Id).Include(x => x.Author).Include(z => z.Copies).ToList();
         }
 
         public BookDetails GetBookDetails(int? id)
         {
-            return context.BookDetails.Find(id);
+            BookDetails details = new BookDetails();
+            details = context.BookDetails.Find(id);
+            details.Copies = GetCopiesById(id);
+            return details;
         }
 
         public void DeleteBook(BookDetails book)

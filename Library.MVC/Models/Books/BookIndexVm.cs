@@ -10,7 +10,6 @@ namespace Library.MVC.Models
     {
         public ICollection<Book> Books { get; set; } = new List<Book>();
         public ICollection<BookDetails> Details { get; set; } = new List<BookDetails>();
-        public ICollection<Author> Authors { get; set; } = new List<Author>();
 
     }
 }
