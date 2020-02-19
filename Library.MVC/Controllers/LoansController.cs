@@ -77,9 +77,10 @@ namespace Library.MVC.Controllers
                         loan.BookId = copy.Id;
                     }
                 }
-
-                loan.DateOfLoan = DateTime.Today.ToLocalTime();
-                loan.DateOfReturn = DateTime.Today.ToLocalTime().AddDays(14);
+                DateTime dateOfLoan = DateTime.Today.ToLocalTime();
+                DateTime dateOfReturn = DateTime.Today.ToLocalTime().AddDays(14);
+                loan.DateOfLoan = dateOfLoan;
+                loan.DateOfReturn = dateOfReturn;
                 loan.MemberId = vm.MemberId;
                 loanService.AddLoan(loan);
 

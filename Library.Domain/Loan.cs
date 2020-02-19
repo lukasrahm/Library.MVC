@@ -23,8 +23,6 @@ namespace Library.Domain
         [Column(TypeName = "Date")]
         public DateTime DateOfReturn { get; set; }
 
-        [DataType(DataType.Date)]
-        [Column(TypeName = "Date")]
-        public DateTime? DateReturned { get; set; }
+        public bool Returned { get; set; }
     }
 }
