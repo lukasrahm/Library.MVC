@@ -101,3 +101,5 @@ Library.MVC/obj/Library.MVC.csproj.nuget.cache
 Library.MVC/obj/Library.MVC.csproj.nuget.dgspec.json
 Library.MVC/obj/Library.MVC.csproj.nuget.g.props
 Library.MVC/obj/project.assets.json
+
+Library.Infrastructure/Migrations
