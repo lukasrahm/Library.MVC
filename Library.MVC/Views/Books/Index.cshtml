@@ -18,25 +18,25 @@
     </thead>
     <tbody>
         @{
-            foreach (var bookDetail in Model.Details)
+            foreach (var book in Model.Books)
             {
-                string shortDescription = new string(bookDetail.Description.Take(50).ToArray()) + "...";
+                string shortDescription = new string(book.Description.Take(50).ToArray()) + "...";
                 int copies = 0;
-                if(bookDetail.Copies != null)
+                if(book.Copies != null)
                 {
-                    copies = bookDetail.Copies.Count();
+                    copies = book.Copies.Count();
                 }
                 if (copies > 0)
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => bookDetail.ISBN)
+                            @Html.DisplayFor(modelItem => book.ISBN)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => bookDetail.Title)
+                            @Html.DisplayFor(modelItem => book.Title)
                         </td>
                         <td>
-                            <a asp-controller="Authors" asp-action="Books" asp-route-id="@bookDetail.AuthorId">@Html.DisplayFor(modelItem => bookDetail.Author.Name)</a>
+                            <a asp-controller="Authors" asp-action="Books" asp-route-id="@book.AuthorId">@Html.DisplayFor(modelItem => book.Author.Name)</a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => shortDescription)
@@ -45,8 +45,8 @@
                             @Html.DisplayFor(modelItem => copies)
                         </td>
                         <td>
-                            <a asp-action="Details" asp-route-id="@bookDetail.Id">Detaljer</a> |
-                            <a asp-controller="Loans" asp-action="Make" asp-route-id="@bookDetail.Id">Låna</a>
+                            <a asp-action="Details" asp-route-id="@book.Id">Detaljer</a> |
+                            <a asp-controller="Loans" asp-action="Make" asp-route-id="@book.Id">Låna</a>
                         </td>
                     </tr>
                 }

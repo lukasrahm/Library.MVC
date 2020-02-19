@@ -29,7 +29,6 @@ namespace Library.MVC
         {
             services.AddControllersWithViews();
             //  Here we inject our services into the the DI container
-            services.AddScoped<IBookDetailsService, BookDetailsService>();
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IAuthorService, AuthorService>();
             services.AddScoped<IMemberService, MemberService>();

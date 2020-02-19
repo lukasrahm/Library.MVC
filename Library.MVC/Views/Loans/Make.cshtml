@@ -10,7 +10,7 @@
         <form asp-action="Make">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <h4>@Html.DisplayFor(model => model.Details.Title)</h4>
+                <h4>@Html.DisplayFor(model => model.Book.Title)</h4>
             </div>
             <div class="form-group">
                 <span asp-validation-for="MemberId" class="text-danger"></span>

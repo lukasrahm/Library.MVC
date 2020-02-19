@@ -18,17 +18,17 @@ namespace Library.Infrastructure.Persistence
         }
 
         public DbSet<Member> Members { get; set; }
-        public DbSet<Book> Books { get; set; }
+        public DbSet<BookCopy> Copies { get; set; }
         public DbSet<Loan> Loans { get; set; }
-        public DbSet<BookDetails> BookDetails { get; set; }
+        public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             ConfigureMember(modelBuilder);
             ConfigureAuthor(modelBuilder);
-            ConfigureBookDetails(modelBuilder);
             ConfigureBook(modelBuilder);
+            ConfigureBookCopy(modelBuilder);
             ConfigureLoan(modelBuilder);
 
 
@@ -44,23 +44,23 @@ namespace Library.Infrastructure.Persistence
                 new Author { Id = 2, Name = "Villiam Skakspjut" },
                 new Author { Id = 3, Name = "Robert C. Martin" }
                 );
-            modelBuilder.Entity<BookDetails>().HasData(
-                new BookDetails { Id = 1, AuthorId = 1, Title = "Hamlet", ISBN = "1472518381", Description = "Arguably Shakespeare's greatest tragedy" },
-                new BookDetails { Id = 2, AuthorId = 1, Title = "King Lear", ISBN = "9780141012292", Description = "King Lear is a tragedy written by William Shakespeare. It depicts the gradual descent into madness of the title character, after he disposes of his kingdom by giving bequests to two of his three daughters egged on by their continual flattery, bringing tragic consequences for all." },
-                new BookDetails { Id = 3, AuthorId = 2, Title = "Othello", ISBN = "1853260185", Description = "An intense drama of love, deception, jealousy and destruction." }
-                );
             modelBuilder.Entity<Book>().HasData(
-                new Book { Id = 1, DetailsId = 1 },
-                new Book { Id = 2, DetailsId = 1 },
-                new Book { Id = 3, DetailsId = 1 },
-                new Book { Id = 4, DetailsId = 2 },
-                new Book { Id = 5, DetailsId = 3 }
+                new Book { Id = 1, AuthorId = 1, Title = "Hamlet", ISBN = "1472518381", Description = "Arguably Shakespeare's greatest tragedy" },
+                new Book { Id = 2, AuthorId = 1, Title = "King Lear", ISBN = "9780141012292", Description = "King Lear is a tragedy written by William Shakespeare. It depicts the gradual descent into madness of the title character, after he disposes of his kingdom by giving bequests to two of his three daughters egged on by their continual flattery, bringing tragic consequences for all." },
+                new Book { Id = 3, AuthorId = 2, Title = "Othello", ISBN = "1853260185", Description = "An intense drama of love, deception, jealousy and destruction." }
+                );
+            modelBuilder.Entity<BookCopy>().HasData(
+                new BookCopy { Id = 1, BookId = 1 },
+                new BookCopy { Id = 2, BookId = 1 },
+                new BookCopy { Id = 3, BookId = 1 },
+                new BookCopy { Id = 4, BookId = 2 },
+                new BookCopy { Id = 5, BookId = 3 }
                 );
             modelBuilder.Entity<Member>().HasData(
                 new Member { Id = 1, Name = "Lukas Rahm", SSN = "199801280919" }
                 );
             modelBuilder.Entity<Loan>().HasData(
-                new Loan { Id = 1, BookId = 1, MemberId = 1, DateOfLoan = DateTime.Today.ToLocalTime(), DateOfReturn = DateTime.Today.ToLocalTime().AddDays(14) }
+                new Loan { Id = 1, BookCopyId = 1, MemberId = 1, DateOfLoan = DateTime.Today.ToLocalTime(), DateOfReturn = DateTime.Today.ToLocalTime().AddDays(14), Returned = true }
                 );
         }
 
@@ -70,18 +70,18 @@ namespace Library.Infrastructure.Persistence
         }
 
 
+        private static void ConfigureBookCopy(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<BookCopy>().HasKey(x => x.Id);
+            modelBuilder.Entity<BookCopy>()
+                .HasOne(b => b.Book)
+                .WithMany(a => a.Copies)
+                .HasForeignKey(b => b.BookId);
+        }
         private static void ConfigureBook(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Book>().HasKey(x => x.Id);
             modelBuilder.Entity<Book>()
-                .HasOne(b => b.Details)
-                .WithMany(a => a.Copies)
-                .HasForeignKey(b => b.DetailsId);
-        }
-        private static void ConfigureBookDetails(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<BookDetails>().HasKey(x => x.Id);
-            modelBuilder.Entity<BookDetails>()
                 .HasOne(b => b.Author)
                 .WithMany(a => a.Books)
                 .HasForeignKey(b => b.AuthorId);

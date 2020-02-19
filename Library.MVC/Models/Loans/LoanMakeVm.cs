@@ -16,7 +16,7 @@ namespace Library.MVC.Models
         [Display(Name = "Medlemmar")]
         public SelectList Members { get; set; }
 
-        public BookDetails Details { get; set; }
+        public Book Book { get; set; }
 
         [DataType(DataType.Date)]
         [Column(TypeName = "Date")]

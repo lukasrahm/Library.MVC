@@ -12,7 +12,7 @@ namespace Library.MVC.Models
     {
         public ICollection<Loan> Loans { get; set; } = new List<Loan>();
         public ICollection<Member> Members { get; set; } = new List<Member>();
+        public ICollection<BookCopy> Copies { get; set; } = new List<BookCopy>();
         public ICollection<Book> Books { get; set; } = new List<Book>();
-        public ICollection<BookDetails> Details { get; set; } = new List<BookDetails>();
     }
 }

@@ -8,7 +8,7 @@ namespace Library.MVC.Models
 {
     public class AuthorsBooksVm
     {
-        public ICollection<BookDetails> Books { get; set; } = new List<BookDetails>();
+        public ICollection<Book> Books { get; set; } = new List<Book>();
         public Author Author { get; set; }
     }
 }

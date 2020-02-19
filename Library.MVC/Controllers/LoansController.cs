@@ -14,14 +14,12 @@ namespace Library.MVC.Controllers
         private readonly ILoanService loanService;
         private readonly IBookService bookService;
         private readonly IMemberService memberService;
-        private readonly IBookDetailsService detailsService;
 
-        public LoansController(ILoanService loanService, IBookService bookService, IMemberService memberService, IBookDetailsService detailsService)
+        public LoansController(ILoanService loanService, IBookService bookService, IMemberService memberService)
         {
             this.loanService = loanService;
             this.bookService = bookService;
             this.memberService = memberService;
-            this.detailsService = detailsService;
         }
 
         //GET: Loans
@@ -29,8 +27,8 @@ namespace Library.MVC.Controllers
         {
             var vm = new LoansVm();
             vm.Loans = loanService.GetAllLoans();
+            vm.Copies = bookService.GetAllBookCopies();
             vm.Books = bookService.GetAllBooks();
-            vm.Details = detailsService.GetAllBookDetails();
             vm.Members = memberService.GetAllMembers();
             return View(vm);
         }
@@ -44,14 +42,14 @@ namespace Library.MVC.Controllers
                 return NotFound();
             }
 
-            var book = detailsService.GetBookDetails(id);
+            var book = bookService.GetBook(id);
             if (book == null)
             {
                 return NotFound();
             }
 
             vm.Members = new SelectList(memberService.GetAllMembers(), "Id", "Name");
-            vm.Details = book;
+            vm.Book = book;
             vm.DateOfLoan = DateTime.Today.ToLocalTime();
             vm.DateOfReturn = DateTime.Today.ToLocalTime().AddDays(14);
 
@@ -67,14 +65,14 @@ namespace Library.MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var book = detailsService.GetBookDetails(id);
+                var book = bookService.GetBook(id);
                 Loan loan = new Loan();
 
                 foreach (var copy in book.Copies)
                 {
                     if (!copy.OnLoan)
                     {
-                        loan.BookId = copy.Id;
+                        loan.BookCopyId = copy.Id;
                     }
                 }
                 DateTime dateOfLoan = DateTime.Today.ToLocalTime();

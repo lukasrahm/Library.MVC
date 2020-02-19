@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Library.MVC.Models
 {
-    public class BookAddVm
+    public class BookAddCopiesVm
     {
         [Display(Name = "Bokdetaljer")]
-        public SelectList DetailsList { get; set; }
+        public SelectList BookList { get; set; }
         [Required]
-        public int DetailId { get; set; }
+        public int BookId { get; set; }
         [Required]
         public int AmountOfCopies { get; set; }
     }

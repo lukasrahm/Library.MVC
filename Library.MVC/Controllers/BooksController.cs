@@ -15,15 +15,13 @@ namespace Library.MVC.Controllers
     public class BooksController : Controller
     {
         private readonly IBookService bookService;
-        private readonly IBookDetailsService bookDetailsService;
         private readonly IAuthorService authorService;
         private readonly ILoanService loanService;
         private readonly IMemberService memberService;
 
-        public BooksController(IBookService bookService, IBookDetailsService bookDetailsService, IAuthorService authorService, ILoanService loanService, IMemberService memberService)
+        public BooksController(IBookService bookService, IAuthorService authorService, ILoanService loanService, IMemberService memberService)
         {
             this.bookService = bookService;
-            this.bookDetailsService = bookDetailsService;
             this.authorService = authorService;
             this.loanService = loanService;
             this.memberService = memberService;
@@ -33,7 +31,7 @@ namespace Library.MVC.Controllers
         public async Task<IActionResult> Index()
         {
             var vm = new BookIndexVm();
-            vm.Details = bookDetailsService.GetAllBookDetails();
+            vm.Copies = bookService.GetAllBookCopies();
             vm.Books = bookService.GetAllBooks();
             return View(vm);
         }
@@ -42,7 +40,7 @@ namespace Library.MVC.Controllers
         public async Task<IActionResult> Admin()
         {
             var vm = new BookIndexVm();
-            vm.Details = bookDetailsService.GetAllBookDetails();
+            vm.Copies = bookService.GetAllBookCopies();
             vm.Books = bookService.GetAllBooks();
             return View(vm);
         }
@@ -65,13 +63,13 @@ namespace Library.MVC.Controllers
             if (ModelState.IsValid)
             {
                 //Create
-                var newBook = new BookDetails();
+                var newBook = new Book();
                 newBook.AuthorId = vm.AuthorId;
                 newBook.Description = vm.Description;
                 newBook.ISBN = vm.ISBN;
                 newBook.Title = vm.Title;
 
-                bookDetailsService.AddNewBook(newBook);
+                bookService.AddNewBook(newBook);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -81,8 +79,8 @@ namespace Library.MVC.Controllers
 
         public IActionResult Add()
         {
-            var vm = new BookAddVm();
-            vm.DetailsList = new SelectList(bookDetailsService.GetAllBookDetails(), "Id", "Title");
+            var vm = new BookAddCopiesVm();
+            vm.BookList = new SelectList(bookService.GetAllBooks(), "Id", "Title");
             return View(vm);
         }
 
@@ -91,17 +89,17 @@ namespace Library.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(BookAddVm vm)
+        public async Task<IActionResult> Add(BookAddCopiesVm vm)
         {
             if (ModelState.IsValid)
             {
                 for (int i = 0; i < vm.AmountOfCopies; i++)
                 {
                     //Skapa ny bok
-                    var addBook = new Book();
+                    var copy = new BookCopy();
 
-                    addBook.DetailsId = vm.DetailId;
-                    bookService.AddBook(addBook);
+                    copy.BookId = vm.BookId;
+                    bookService.AddBookCopy(copy);
 
                 }
 
@@ -121,20 +119,20 @@ namespace Library.MVC.Controllers
                 return NotFound();
             }
 
-            var bookDetails = bookDetailsService.GetBookDetails(id);
-            if (bookDetails == null)
+            var book = bookService.GetBook(id);
+            if (book == null)
             {
                 return NotFound();
             }
 
-            var vm = new BookDetails();
-            vm.Id = bookDetails.Id;
-            vm.ISBN = bookDetails.ISBN;
-            vm.Title = bookDetails.Title;
-            vm.AuthorId = bookDetails.AuthorId;
-            vm.Description = bookDetails.Description;
-            vm.Author = authorService.GetAuthorById(bookDetails.AuthorId);
-            vm.Copies = bookDetailsService.GetCopiesById(bookDetails.Id);
+            var vm = new Book();
+            vm.Id = book.Id;
+            vm.ISBN = book.ISBN;
+            vm.Title = book.Title;
+            vm.AuthorId = book.AuthorId;
+            vm.Description = book.Description;
+            vm.Author = authorService.GetAuthorById(book.AuthorId);
+            vm.Copies = bookService.GetCopiesById(book.Id);
             return View(vm);
 
 
@@ -149,7 +147,7 @@ namespace Library.MVC.Controllers
                 return NotFound();
             }
 
-            var bookDetails = bookDetailsService.GetBookDetails(id);
+            var bookDetails = bookService.GetBook(id);
             if (bookDetails == null)
             {
                 return NotFound();
@@ -171,10 +169,10 @@ namespace Library.MVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,ISBN,Title,AuthorId,Description")] BookDetails bookDetails)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,ISBN,Title,AuthorId,Description")] Book book)
         {
 
-            if (id != bookDetails.Id)
+            if (id != book.Id)
             {
                 return NotFound();
             }
@@ -183,11 +181,11 @@ namespace Library.MVC.Controllers
             {
                 try
                 {
-                    bookDetailsService.UpdateBookDetails(bookDetails);
+                    bookService.UpdateBook(book);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (id != bookDetails.Id)
+                    if (id != book.Id)
                     {
                         return NotFound();
                     }
@@ -199,7 +197,7 @@ namespace Library.MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(bookDetails);
+            return View(book);
 
         }
 
@@ -212,23 +210,23 @@ namespace Library.MVC.Controllers
                 return NotFound();
             }
 
-            var bookDetails = bookDetailsService.GetBookDetails(id);
-            if (bookDetails == null)
+            var book = bookService.GetBook(id);
+            if (book == null)
             {
                 return NotFound();
             }
 
-            return View(bookDetails);
+            return View(book);
 
         }
 
         // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(BookDetails bookDetails)
+        public async Task<IActionResult> DeleteConfirmed(Book book)
         {
 
-            bookDetailsService.DeleteBook(bookDetails);
+            bookService.DeleteBook(book);
 
 
             return RedirectToAction(nameof(Index));

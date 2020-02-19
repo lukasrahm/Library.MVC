@@ -5,9 +5,11 @@ namespace Library.Domain
     public class Book
     {
         public int Id { get; set; }
-        public int DetailsId { get; set; }
-        public BookDetails Details { get; set; }
-
-        public bool OnLoan { get; set; }
+        public string ISBN { get; set; }
+        public string Title { get; set; }
+        public int AuthorId { get; set; }
+        public Author Author { get; set; }
+        public string Description { get; set; }
+        public IList<BookCopy> Copies { get; set; }
     }
 }

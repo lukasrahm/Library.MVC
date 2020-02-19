@@ -59,58 +59,6 @@ namespace Library.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("DetailsId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("OnLoan")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DetailsId");
-
-                    b.ToTable("Books");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DetailsId = 1,
-                            OnLoan = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DetailsId = 1,
-                            OnLoan = false
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DetailsId = 1,
-                            OnLoan = false
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DetailsId = 2,
-                            OnLoan = false
-                        },
-                        new
-                        {
-                            Id = 5,
-                            DetailsId = 3,
-                            OnLoan = false
-                        });
-                });
-
-            modelBuilder.Entity("Library.Domain.BookDetails", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
 
@@ -127,7 +75,7 @@ namespace Library.Infrastructure.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("BookDetails");
+                    b.ToTable("Books");
 
                     b.HasData(
                         new
@@ -156,7 +104,7 @@ namespace Library.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Library.Domain.Loan", b =>
+            modelBuilder.Entity("Library.Domain.BookCopy", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -164,6 +112,58 @@ namespace Library.Infrastructure.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("BookId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("OnLoan")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BookId");
+
+                    b.ToTable("Copies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BookId = 1,
+                            OnLoan = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BookId = 1,
+                            OnLoan = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BookId = 1,
+                            OnLoan = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BookId = 2,
+                            OnLoan = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BookId = 3,
+                            OnLoan = false
+                        });
+                });
+
+            modelBuilder.Entity("Library.Domain.Loan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookCopyId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateOfLoan")
@@ -180,7 +180,7 @@ namespace Library.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BookId");
+                    b.HasIndex("BookCopyId");
 
                     b.HasIndex("MemberId");
 
@@ -190,11 +190,11 @@ namespace Library.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            BookId = 1,
+                            BookCopyId = 1,
                             DateOfLoan = new DateTime(2020, 2, 19, 0, 0, 0, 0, DateTimeKind.Local),
                             DateOfReturn = new DateTime(2020, 3, 4, 0, 0, 0, 0, DateTimeKind.Local),
                             MemberId = 1,
-                            Returned = false
+                            Returned = true
                         });
                 });
 
@@ -226,15 +226,6 @@ namespace Library.Infrastructure.Migrations
 
             modelBuilder.Entity("Library.Domain.Book", b =>
                 {
-                    b.HasOne("Library.Domain.BookDetails", "Details")
-                        .WithMany("Copies")
-                        .HasForeignKey("DetailsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Library.Domain.BookDetails", b =>
-                {
                     b.HasOne("Library.Domain.Author", "Author")
                         .WithMany("Books")
                         .HasForeignKey("AuthorId")
@@ -242,11 +233,20 @@ namespace Library.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Library.Domain.Loan", b =>
+            modelBuilder.Entity("Library.Domain.BookCopy", b =>
                 {
                     b.HasOne("Library.Domain.Book", "Book")
-                        .WithMany()
+                        .WithMany("Copies")
                         .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Library.Domain.Loan", b =>
+                {
+                    b.HasOne("Library.Domain.BookCopy", "BookCopy")
+                        .WithMany()
+                        .HasForeignKey("BookCopyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

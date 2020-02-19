@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Library.Infrastructure.Migrations
 {
-    public partial class intialize : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,7 +35,7 @@ namespace Library.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BookDetails",
+                name: "Books",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -47,9 +47,9 @@ namespace Library.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_BookDetails", x => x.Id);
+                    table.PrimaryKey("PK_Books", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BookDetails_Authors_AuthorId",
+                        name: "FK_Books_Authors_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "Authors",
                         principalColumn: "Id",
@@ -57,21 +57,21 @@ namespace Library.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Books",
+                name: "Copies",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DetailsId = table.Column<int>(nullable: false),
-                    LoanId = table.Column<int>(nullable: true)
+                    BookId = table.Column<int>(nullable: false),
+                    OnLoan = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.PrimaryKey("PK_Copies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Books_BookDetails_DetailsId",
-                        column: x => x.DetailsId,
-                        principalTable: "BookDetails",
+                        name: "FK_Copies_Books_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -82,19 +82,19 @@ namespace Library.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    BookCopyId = table.Column<int>(nullable: false),
                     MemberId = table.Column<int>(nullable: false),
-                    BookId = table.Column<int>(nullable: false),
                     DateOfLoan = table.Column<DateTime>(type: "Date", nullable: false),
                     DateOfReturn = table.Column<DateTime>(type: "Date", nullable: false),
-                    DateReturned = table.Column<DateTime>(type: "Date", nullable: true)
+                    Returned = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Loans", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Loans_Books_BookId",
-                        column: x => x.BookId,
-                        principalTable: "Books",
+                        name: "FK_Loans_Copies_BookCopyId",
+                        column: x => x.BookCopyId,
+                        principalTable: "Copies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -121,52 +121,51 @@ namespace Library.Infrastructure.Migrations
                 values: new object[] { 1, "Lukas Rahm", "199801280919" });
 
             migrationBuilder.InsertData(
-                table: "BookDetails",
+                table: "Books",
                 columns: new[] { "Id", "AuthorId", "Description", "ISBN", "Title" },
                 values: new object[] { 1, 1, "Arguably Shakespeare's greatest tragedy", "1472518381", "Hamlet" });
 
             migrationBuilder.InsertData(
-                table: "BookDetails",
+                table: "Books",
                 columns: new[] { "Id", "AuthorId", "Description", "ISBN", "Title" },
                 values: new object[] { 2, 1, "King Lear is a tragedy written by William Shakespeare. It depicts the gradual descent into madness of the title character, after he disposes of his kingdom by giving bequests to two of his three daughters egged on by their continual flattery, bringing tragic consequences for all.", "9780141012292", "King Lear" });
 
             migrationBuilder.InsertData(
-                table: "BookDetails",
+                table: "Books",
                 columns: new[] { "Id", "AuthorId", "Description", "ISBN", "Title" },
                 values: new object[] { 3, 2, "An intense drama of love, deception, jealousy and destruction.", "1853260185", "Othello" });
 
             migrationBuilder.InsertData(
-                table: "Books",
-                columns: new[] { "Id", "DetailsId", "LoanId" },
+                table: "Copies",
+                columns: new[] { "Id", "BookId", "OnLoan" },
                 values: new object[,]
                 {
-                    { 1, 1, null },
-                    { 2, 1, null },
-                    { 3, 1, null },
-                    { 4, 2, null },
-                    { 5, 3, null }
+                    { 1, 1, false },
+                    { 2, 1, false },
+                    { 3, 1, false },
+                    { 4, 2, false },
+                    { 5, 3, false }
                 });
 
             migrationBuilder.InsertData(
                 table: "Loans",
-                columns: new[] { "Id", "BookId", "DateOfLoan", "DateOfReturn", "DateReturned", "MemberId" },
-                values: new object[] { 1, 1, new DateTime(2020, 2, 17, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2020, 3, 2, 0, 0, 0, 0, DateTimeKind.Local), null, 1 });
+                columns: new[] { "Id", "BookCopyId", "DateOfLoan", "DateOfReturn", "MemberId", "Returned" },
+                values: new object[] { 1, 1, new DateTime(2020, 2, 19, 0, 0, 0, 0, DateTimeKind.Local), new DateTime(2020, 3, 4, 0, 0, 0, 0, DateTimeKind.Local), 1, false });
 
             migrationBuilder.CreateIndex(
-                name: "IX_BookDetails_AuthorId",
-                table: "BookDetails",
+                name: "IX_Books_AuthorId",
+                table: "Books",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Books_DetailsId",
-                table: "Books",
-                column: "DetailsId");
+                name: "IX_Copies_BookId",
+                table: "Copies",
+                column: "BookId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Loans_BookId",
+                name: "IX_Loans_BookCopyId",
                 table: "Loans",
-                column: "BookId",
-                unique: true);
+                column: "BookCopyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Loans_MemberId",
@@ -180,13 +179,13 @@ namespace Library.Infrastructure.Migrations
                 name: "Loans");
 
             migrationBuilder.DropTable(
-                name: "Books");
+                name: "Copies");
 
             migrationBuilder.DropTable(
                 name: "Members");
 
             migrationBuilder.DropTable(
-                name: "BookDetails");
+                name: "Books");
 
             migrationBuilder.DropTable(
                 name: "Authors");

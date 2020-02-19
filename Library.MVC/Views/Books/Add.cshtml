@@ -1,4 +1,4 @@
-﻿@model Library.MVC.Models.BookAddVm;
+﻿@model Library.MVC.Models.BookAddCopiesVm;
 
 @{
     ViewData["Title"] = "Add";
@@ -17,8 +17,8 @@
                 <span asp-validation-for="AmountOfCopies" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DetailsList" class="control-label"></label>
-                @Html.DropDownListFor(m => m.DetailId, Model.DetailsList, "Välj bok")
+                <label asp-for="BookList" class="control-label"></label>
+                @Html.DropDownListFor(m => m.BookId, Model.BookList, "Välj bok")
                 <div>
                     <a asp-controller="BookEdit" asp-action="Create">Lägg till ny bok</a>
                 </div>
