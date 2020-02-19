@@ -26,10 +26,6 @@ namespace Library.Application.Interfaces
 
         void DeleteBook(Book book);
 
-        IList<BookCopy> GetCopiesById(int? bookId);
-
-        IList<Book> GetBooksByAuthorId(int? id);
-
 
 
 
@@ -42,6 +38,8 @@ namespace Library.Application.Interfaces
         void LoanBookCopy(BookCopy copy);
 
         void UpdateBookCopy(BookCopy copy);
+
+        BookCopy GetBookCopy(int? id);
 
         /// <summary>
         /// Gets all books from the database

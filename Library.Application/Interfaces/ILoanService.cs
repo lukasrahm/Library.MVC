@@ -11,6 +11,8 @@ namespace Library.Application.Interfaces
         /// <param name="loan"></param>
         void AddLoan(Loan loan);
 
+        void UpdateLoan(Loan loan);
+
         IList<Loan> GetAllLoans();
         Loan GetLoan(int? id);
 

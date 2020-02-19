@@ -41,7 +41,7 @@ namespace Library.Infrastructure.Services
         {
             Book book = new Book();
             book = context.Books.Find(id);
-            book.Copies = GetCopiesById(id);
+            book.Copies = context.Copies.Where(x => x.BookId == id).ToList();
             return book;
         }
 
@@ -51,16 +51,6 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
 
         }
-
-        public IList<BookCopy> GetCopiesById(int? bookId)
-        {
-            return context.Copies.Where(copy => copy.BookId == bookId).ToList();
-        }
-        public IList<Book> GetBooksByAuthorId(int? authorId)
-        {
-            return context.Books.Where(book => book.AuthorId == authorId).ToList();
-        }
-
 
 
         public void AddBookCopy(BookCopy copy)
@@ -85,6 +75,11 @@ namespace Library.Infrastructure.Services
         {
             context.Update(copy);
             context.SaveChanges();
+        }
+
+        public BookCopy GetBookCopy(int? id)
+        {
+            return context.Copies.Find(id);
         }
     }
 }

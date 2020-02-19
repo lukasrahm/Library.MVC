@@ -91,5 +91,46 @@ namespace Library.MVC.Controllers
 
             return View(vm);
         }
+
+
+
+        // GET: Loans/Return
+        public async Task<IActionResult> Return(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var loan = loanService.GetLoan(id);
+            var copy = bookService.GetBookCopy(loan.BookCopyId);
+            var member = memberService.GetMemberById(loan.MemberId);
+
+            if (loan == null || copy == null || member == null)
+            {
+                return NotFound();
+            }
+
+            loan.Returned = true;
+            copy.OnLoan = false;
+
+
+            //If the book is returned late we add a fee
+            DateTime date = DateTime.Today.ToLocalTime();
+            if (date > loan.DateOfReturn)
+            {
+                int lateFee = Convert.ToInt32((date - loan.DateOfReturn).TotalDays) * 12; 
+                member.Fees += lateFee;
+                memberService.UpdateMember(member);
+            }
+
+            loanService.UpdateLoan(loan);
+            bookService.UpdateBookCopy(copy);
+
+
+
+
+            return RedirectToAction("Index", "Loans");
+        }
     }
 }

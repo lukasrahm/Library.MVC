@@ -68,13 +68,8 @@ namespace Library.MVC.Controllers
                 return NotFound();
             }
 
-            var vm = new AuthorsBooksVm();
-            vm.Books = bookService.GetBooksByAuthorId(Id);
-            vm.Author = authorService.GetAuthorById(Id);
-
+            var vm = authorService.GetAuthorById(Id);
             return View(vm);
-
-
         }
 
         // GET: Books/Edit/5

@@ -32,7 +32,9 @@ namespace Library.Infrastructure.Services
 
         public Author GetAuthorById(int? authorId)
         {
-            return context.Authors.Find(authorId);
+            Author author = context.Authors.Find(authorId);
+            author.Books = context.Books.Where(x => x.AuthorId == authorId).ToList();
+            return author;
         }
 
         public void UpdateAuthor(Author author)

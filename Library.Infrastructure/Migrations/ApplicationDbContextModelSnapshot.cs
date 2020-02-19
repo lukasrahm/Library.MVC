@@ -205,6 +205,9 @@ namespace Library.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Fees")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -219,6 +222,7 @@ namespace Library.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
+                            Fees = 0,
                             Name = "Lukas Rahm",
                             SSN = "199801280919"
                         });

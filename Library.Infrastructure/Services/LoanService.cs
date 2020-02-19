@@ -24,6 +24,12 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
         }
 
+        public void UpdateLoan(Loan loan)
+        {
+            context.Update(loan);
+            context.SaveChanges();
+        }
+
 
         public IList<Loan> GetAllLoans()
         {

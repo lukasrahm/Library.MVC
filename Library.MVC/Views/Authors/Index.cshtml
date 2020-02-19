@@ -26,10 +26,10 @@
                 @Html.DisplayFor(modelItem => item.Books)
             </td>
             <td>
-                <a asp-action="Books" asp-route-id="@item.Id">Visa böcker</a> |
+                <a class="btn btn-primary" asp-action="Books" asp-route-id="@item.Id">Visa böcker</a> 
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Redigera</a> |
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Redigera</a> 
             </td>
         </tr>
         }

@@ -47,20 +47,22 @@
                     @{int availableToLoan = 0;
                         foreach (var copy in book.Copies)
                         {
-                            if (!copy.OnLoan)
-                            {
-                                availableToLoan++;
-                            }
+                        if (!copy.OnLoan)
+                        {
+                        availableToLoan++;
+                        }
                         }
                     }
                     <td>
                         @Html.DisplayFor(modelItem => availableToLoan)
                     </td>
                     <td>
-                        <a asp-action="Details" asp-route-id="@book.Id">Detaljer</a> |
+                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@book.Id">Detaljer</a>
+                    </td>
+                    <td>
                         @if (availableToLoan > 0)
                         {
-                            <a class="btn btn-primary" asp-controller="Loans" asp-action="Make" asp-route-id="@book.Id">Låna</a>
+                        <a class="btn btn-success" asp-controller="Loans" asp-action="Make" asp-route-id="@book.Id">Låna</a>
                         }
                     </td>
                 </tr>

@@ -31,28 +31,32 @@
             {
                 copies = book.Copies.Count;
             }
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => book.ISBN)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => book.Title)
-            </td>
-            <td>
-                <a asp-controller="Authors" asp-action="Books" asp-route-id="@book.AuthorId">@Html.DisplayFor(modelItem => book.Author.Name)</a>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => shortDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => copies)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@book.Id">Redigera</a> |
-                <a asp-action="Details" asp-route-id="@book.Id">Detaljer</a> |
-                <a asp-action="Delete" asp-route-id="@book.Id">Ta bort</a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => book.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => book.Title)
+                </td>
+                <td>
+                    <a asp-controller="Authors" asp-action="Books" asp-route-id="@book.AuthorId">@Html.DisplayFor(modelItem => book.Author.Name)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => shortDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => copies)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@book.Id">Redigera</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@book.Id">Detaljer</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@book.Id">Radera</a>
+                </td>
+            </tr>
 
 
         }

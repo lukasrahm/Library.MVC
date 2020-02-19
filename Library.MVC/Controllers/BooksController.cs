@@ -125,14 +125,7 @@ namespace Library.MVC.Controllers
                 return NotFound();
             }
 
-            var vm = new Book();
-            vm.Id = book.Id;
-            vm.ISBN = book.ISBN;
-            vm.Title = book.Title;
-            vm.AuthorId = book.AuthorId;
-            vm.Description = book.Description;
-            vm.Author = authorService.GetAuthorById(book.AuthorId);
-            vm.Copies = bookService.GetCopiesById(book.Id);
+            var vm = bookService.GetBook(id);
             return View(vm);
 
 
