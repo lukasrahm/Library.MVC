@@ -41,6 +41,8 @@ namespace Library.Application.Interfaces
 
         void LoanBookCopy(BookCopy copy);
 
+        void UpdateBookCopy(BookCopy copy);
+
         /// <summary>
         /// Gets all books from the database
         /// </summary>

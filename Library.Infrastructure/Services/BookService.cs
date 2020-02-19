@@ -69,6 +69,12 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
         }
 
+        public void UpdateBookCopy(BookCopy copy)
+        {
+            context.Update(copy);
+            context.SaveChanges();
+        }
+
         public IList<BookCopy> GetAllBookCopies()
         {
             // Here we are using .Include() to eager load the author, read more about loading related data at https://docs.microsoft.com/en-us/ef/core/querying/related-data

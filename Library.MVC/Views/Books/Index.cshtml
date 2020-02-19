@@ -13,7 +13,7 @@
             <th>Författare</th>
             <th>Beskrivning</th>
             <th>Exemplar</th>
-            <th></th>
+            <th>Tillgängliga</th>
         </tr>
     </thead>
     <tbody>
@@ -22,33 +22,48 @@
             {
                 string shortDescription = new string(book.Description.Take(50).ToArray()) + "...";
                 int copies = 0;
-                if(book.Copies != null)
+                if (book.Copies != null)
                 {
                     copies = book.Copies.Count();
                 }
                 if (copies > 0)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => book.ISBN)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => book.Title)
-                        </td>
-                        <td>
-                            <a asp-controller="Authors" asp-action="Books" asp-route-id="@book.AuthorId">@Html.DisplayFor(modelItem => book.Author.Name)</a>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => shortDescription)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => copies)
-                        </td>
-                        <td>
-                            <a asp-action="Details" asp-route-id="@book.Id">Detaljer</a> |
-                            <a asp-controller="Loans" asp-action="Make" asp-route-id="@book.Id">Låna</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => book.ISBN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => book.Title)
+                    </td>
+                    <td>
+                        <a asp-controller="Authors" asp-action="Books" asp-route-id="@book.AuthorId">@Html.DisplayFor(modelItem => book.Author.Name)</a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => shortDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => copies)
+                    </td>
+                    @{int availableToLoan = 0;
+                        foreach (var copy in book.Copies)
+                        {
+                            if (!copy.OnLoan)
+                            {
+                                availableToLoan++;
+                            }
+                        }
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => availableToLoan)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@book.Id">Detaljer</a> |
+                        @if (availableToLoan > 0)
+                        {
+                            <a class="btn btn-primary" asp-controller="Loans" asp-action="Make" asp-route-id="@book.Id">Låna</a>
+                        }
+                    </td>
+                </tr>
                 }
             }
 

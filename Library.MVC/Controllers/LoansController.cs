@@ -73,8 +73,12 @@ namespace Library.MVC.Controllers
                     if (!copy.OnLoan)
                     {
                         loan.BookCopyId = copy.Id;
+                        copy.OnLoan = true;
+                        bookService.UpdateBookCopy(copy);
+                        break;
                     }
                 }
+
                 DateTime dateOfLoan = DateTime.Today.ToLocalTime();
                 DateTime dateOfReturn = DateTime.Today.ToLocalTime().AddDays(14);
                 loan.DateOfLoan = dateOfLoan;
