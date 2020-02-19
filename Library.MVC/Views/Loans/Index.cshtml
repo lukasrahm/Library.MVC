@@ -34,9 +34,14 @@
                         @Html.DisplayFor(modelItem => loan.DateOfReturn)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => loan.Returned)
+                        @if (loan.Returned)
+                        {
+                            <content style="color: green; width: 100%; height: 100%">@Html.DisplayFor(modelItem => loan.Returned)</content>
+                        }
+
                     </td>
-                </tr>
+
+            </tr>
             }
         }
     </tbody>
