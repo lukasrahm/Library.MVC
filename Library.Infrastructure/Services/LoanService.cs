@@ -33,7 +33,7 @@ namespace Library.Infrastructure.Services
 
         public IList<Loan> GetAllLoans()
         {
-            return context.Loans.OrderBy(x => x.Id).Include(x => x.BookCopy).ThenInclude(x => x.Book).ToList();
+            return context.Loans.OrderBy(x => x.Returned).Include(x => x.BookCopy).ThenInclude(x => x.Book).ToList();
         }
 
         public Loan GetLoan(int? id)

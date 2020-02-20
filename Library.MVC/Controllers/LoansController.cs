@@ -128,9 +128,7 @@ namespace Library.MVC.Controllers
             bookService.UpdateBookCopy(copy);
 
 
-
-
-            return RedirectToAction("Index", "Loans");
+            return RedirectToAction("Index", RouteData.Values["Controller"].ToString());
         }
     }
 }

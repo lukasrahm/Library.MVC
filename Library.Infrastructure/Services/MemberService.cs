@@ -42,7 +42,9 @@ namespace Library.Infrastructure.Services
 
         public Member GetMemberById(int? id)
         {
-            return context.Members.Find(id);
+            Member member = context.Members.Find(id);
+            member.Loans = context.Loans.Where(x => x.MemberId == id).OrderBy(x => x.Returned).ToList();
+            return member;
         }
 
         public void UpdateMember(Member member)

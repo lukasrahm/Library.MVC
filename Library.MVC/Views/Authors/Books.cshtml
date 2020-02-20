@@ -20,17 +20,20 @@
             {
             string shortDescription = new string(book.Description.Take(50).ToArray()) + "...";
 
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => book.ISBN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => book.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => shortDescription)
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => book.ISBN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => book.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => shortDescription)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-controller="Books" asp-action="Details" asp-route-id="@book.Id">Detaljer</a>
+                    </td>
+                </tr>
 
             }
 

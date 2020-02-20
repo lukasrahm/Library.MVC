@@ -19,6 +19,8 @@
             <th>Författare</th>
             <th>Beskrivning</th>
             <th>Exemplar</th>
+            <th>Tillgängliga</th>
+            <th>Utlånade</th>
         </tr>
     </thead>
     <tbody>
@@ -31,32 +33,48 @@
             {
                 copies = book.Copies.Count;
             }
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => book.ISBN)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => book.Title)
-                </td>
-                <td>
-                    <a asp-controller="Authors" asp-action="Books" asp-route-id="@book.AuthorId">@Html.DisplayFor(modelItem => book.Author.Name)</a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => shortDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => copies)
-                </td>
-                <td>
-                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@book.Id">Redigera</a>
-                </td>
-                <td>
-                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@book.Id">Detaljer</a>
-                </td>
-                <td>
-                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@book.Id">Radera</a>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => book.ISBN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => book.Title)
+            </td>
+            <td>
+                <a asp-controller="Authors" asp-action="Books" asp-route-id="@book.AuthorId">@Html.DisplayFor(modelItem => book.Author.Name)</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => shortDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => copies)
+            </td>
+            @{int availableToLoan = 0;
+                foreach (var copy in book.Copies)
+                {
+                    if (!copy.OnLoan)
+                    {
+                        availableToLoan++;
+                    }
+                }
+                int onLoan = copies - availableToLoan;
+            }
+            <td>
+                @Html.DisplayFor(modelItem => availableToLoan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => onLoan)
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@book.Id">Redigera</a>
+            </td>
+            <td>
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@book.Id">Detaljer</a>
+            </td>
+            <td>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@book.Id">Radera</a>
+            </td>
+        </tr>
 
 
         }

@@ -54,7 +54,10 @@
 
 
                 <td>
+                    @if (!loan.Returned)
+                    {
                         <a class="btn btn-success" asp-controller="Loans" asp-action="Return" asp-route-id="@loan.Id">Returnera</a>
+                    }
                 </td>
 
 

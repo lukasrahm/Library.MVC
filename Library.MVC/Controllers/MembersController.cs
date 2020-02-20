@@ -13,18 +13,22 @@ namespace Library.MVC.Controllers
 {
     public class MembersController : Controller
     {
-        private readonly IMemberService memberservice;
+        private readonly IMemberService memberService;
+        private readonly IBookService bookService;
+        private readonly ILoanService loanService;
 
-        public MembersController(IMemberService memberservice)
+        public MembersController(IMemberService memberService, IBookService bookService, ILoanService loanService)
         {
-            this.memberservice = memberservice;
+            this.memberService = memberService;
+            this.bookService = bookService;
+            this.loanService = loanService;
         }
 
         //GET: Members
         public async Task<IActionResult> Index()
         {
             var vm = new MemberIndexVm();
-            vm.Members = memberservice.GetAllMembers();
+            vm.Members = memberService.GetAllMembers();
             return View(vm);
         }
 
@@ -50,7 +54,7 @@ namespace Library.MVC.Controllers
                 newMember.SSN = vm.SSN;
                 newMember.Name = vm.Name;
 
-                memberservice.AddMember(newMember);
+                memberService.AddMember(newMember);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -65,7 +69,7 @@ namespace Library.MVC.Controllers
             {
                 return NotFound();
             }
-            var member = memberservice.GetMemberById(id);
+            var member = memberService.GetMemberById(id);
             if (member == null)
             {
                 return NotFound();
@@ -94,7 +98,7 @@ namespace Library.MVC.Controllers
             {
                 try
                 {
-                    memberservice.UpdateMember(member);
+                    memberService.UpdateMember(member);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -120,19 +124,63 @@ namespace Library.MVC.Controllers
                 return NotFound();
             }
 
-            var member = memberservice.GetMemberById(id);
+            var vm = new MemberDetailsVm();
+            var member = memberService.GetMemberById(id);
+            
+
             if (member == null)
             {
                 return NotFound();
             }
 
-            var vm = new Member();
-            vm.Id = member.Id;
-            vm.SSN = member.SSN;
+            vm.Books = bookService.GetAllBooks();
+            vm.Fees = member.Fees;
+            vm.Loans = member.Loans;
             vm.Name = member.Name;
+            vm.SSN = member.SSN;
+            vm.Id = member.Id;
+
+
             return View(vm);
 
 
+        }
+
+        // GET: Members/ReturnBook  
+        public async Task<IActionResult> ReturnBook(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var loan = loanService.GetLoan(id);
+            var copy = bookService.GetBookCopy(loan.BookCopyId);
+            var member = memberService.GetMemberById(loan.MemberId);
+
+            if (loan == null || copy == null || member == null)
+            {
+                return NotFound();
+            }
+
+            loan.Returned = true;
+            copy.OnLoan = false;
+
+
+            //If the book is returned late we add a fee
+            DateTime date = DateTime.Today.ToLocalTime();
+            if (date > loan.DateOfReturn)
+            {
+                int lateFee = Convert.ToInt32((date - loan.DateOfReturn).TotalDays) * 12;
+                member.Fees += lateFee;
+                memberService.UpdateMember(member);
+            }
+
+            loanService.UpdateLoan(loan);
+            bookService.UpdateBookCopy(copy);
+
+
+            return RedirectToAction("Index", "Members");
         }
     }
 }

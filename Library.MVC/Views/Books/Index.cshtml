@@ -47,10 +47,10 @@
                     @{int availableToLoan = 0;
                         foreach (var copy in book.Copies)
                         {
-                        if (!copy.OnLoan)
-                        {
-                        availableToLoan++;
-                        }
+                            if (!copy.OnLoan)
+                            {
+                                availableToLoan++;
+                            }
                         }
                     }
                     <td>
@@ -62,7 +62,7 @@
                     <td>
                         @if (availableToLoan > 0)
                         {
-                        <a class="btn btn-success" asp-controller="Loans" asp-action="Make" asp-route-id="@book.Id">Låna</a>
+                            <a class="btn btn-success" asp-controller="Loans" asp-action="Make" asp-route-id="@book.Id">Låna</a>
                         }
                     </td>
                 </tr>

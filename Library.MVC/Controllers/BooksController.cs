@@ -9,6 +9,8 @@ using Library.Domain;
 using Library.MVC.Models;
 using Library.Application.Interfaces;
 using Library.Infrastructure.Services;
+using Microsoft.AspNetCore.Http.Headers;
+using Microsoft.AspNetCore.Http;
 
 namespace Library.MVC.Controllers
 {
@@ -26,6 +28,7 @@ namespace Library.MVC.Controllers
             this.loanService = loanService;
             this.memberService = memberService;
         }
+
 
         //GET: Books
         public async Task<IActionResult> Index()
