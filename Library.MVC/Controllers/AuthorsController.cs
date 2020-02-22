@@ -23,14 +23,21 @@ namespace Library.MVC.Controllers
             this.authorService = authorService;
         }
 
-        //GET: Authors
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searching)
         {
             var vm = new AuthorIndexVm();
-            vm.Authors = authorService.GetAllAuthors();
-            return View(vm);
-        }
+            if (searching == null)
+            {
+                vm.Authors = authorService.GetAllAuthors();
+                return View(vm);
+            }
+            else
+            {
+                vm.Authors = authorService.SearchAuthors(searching);
+                return View(vm);
+            }
 
+        }
 
         // GET: Authors/Create
         public IActionResult Create()

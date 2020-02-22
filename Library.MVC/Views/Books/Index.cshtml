@@ -4,6 +4,12 @@
     ViewData["Title"] = "Index";
 }
 <h1>Böcker</h1>
+Sök efter Böcker
+@using (Html.BeginForm("Index", "Books", FormMethod.Get))
+{
+@Html.TextBox("searching")
+<input type="submit" value="Sök" />
+}
 
 <table class="table">
     <thead>
@@ -20,53 +26,53 @@
         @{
             foreach (var book in Model.Books)
             {
-                string shortDescription = new string(book.Description.Take(50).ToArray()) + "...";
-                int copies = 0;
-                if (book.Copies != null)
-                {
-                    copies = book.Copies.Count();
-                }
-                if (copies > 0)
-                {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => book.ISBN)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => book.Title)
-                    </td>
-                    <td>
-                        <a asp-controller="Authors" asp-action="Books" asp-route-id="@book.AuthorId">@Html.DisplayFor(modelItem => book.Author.Name)</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => shortDescription)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => copies)
-                    </td>
-                    @{int availableToLoan = 0;
-                        foreach (var copy in book.Copies)
-                        {
-                            if (!copy.OnLoan)
-                            {
-                                availableToLoan++;
-                            }
-                        }
+            string shortDescription = new string(book.Description.Take(50).ToArray()) + "...";
+            int copies = 0;
+            if (book.Copies != null)
+            {
+            copies = book.Copies.Count();
+            }
+            if (copies > 0)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => book.ISBN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => book.Title)
+                </td>
+                <td>
+                    <a asp-controller="Authors" asp-action="Books" asp-route-id="@book.AuthorId">@Html.DisplayFor(modelItem => book.Author.Name)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => shortDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => copies)
+                </td>
+                @{int availableToLoan = 0;
+                    foreach (var copy in book.Copies)
+                    {
+                    if (!copy.OnLoan)
+                    {
+                    availableToLoan++;
                     }
-                    <td>
-                        @Html.DisplayFor(modelItem => availableToLoan)
-                    </td>
-                    <td>
-                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@book.Id">Detaljer</a>
-                    </td>
-                    <td>
-                        @if (availableToLoan > 0)
-                        {
-                            <a class="btn btn-success" asp-controller="Loans" asp-action="Make" asp-route-id="@book.Id">Låna</a>
-                        }
-                    </td>
-                </tr>
+                    }
                 }
+                <td>
+                    @Html.DisplayFor(modelItem => availableToLoan)
+                </td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Details" asp-route-id="@book.Id">Detaljer</a>
+                </td>
+                <td>
+                    @if (availableToLoan > 0)
+                    {
+                    <a class="btn btn-success" asp-controller="Loans" asp-action="Make" asp-route-id="@book.Id">Låna</a>
+                    }
+                </td>
+            </tr>
+            }
             }
 
         }

@@ -9,6 +9,14 @@
 <p>
     <a asp-action="Create">Lägg till ny författare</a>
 </p>
+
+Sök efter författare
+@using (Html.BeginForm("Index", "Authors", FormMethod.Get))
+{
+    @Html.TextBox("searching")
+    <input type="submit" value="Sök" />
+}
+<table class="table">
 <table class="table">
     <thead>
         <tr>

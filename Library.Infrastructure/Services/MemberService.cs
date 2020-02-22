@@ -52,5 +52,17 @@ namespace Library.Infrastructure.Services
             context.Update(member);
             context.SaveChanges();
         }
+
+
+        public IList<Member> SearchMembers(string searching)
+        {
+            if (searching.All(c => char.IsDigit(c)))
+            {
+                    //searching for book SSN
+                    return context.Members.Where(x => x.SSN.Contains(searching)).ToList();
+            }
+
+            return context.Members.Where(x => x.Name.Contains(searching)).ToList();
+        }
     }
 }

@@ -16,36 +16,53 @@ namespace Library.MVC.Controllers
 {
     public class BooksController : Controller
     {
-        private readonly IBookService bookService;
+
         private readonly IAuthorService authorService;
-        private readonly ILoanService loanService;
-        private readonly IMemberService memberService;
+        private readonly IBookService bookService;
 
-        public BooksController(IBookService bookService, IAuthorService authorService, ILoanService loanService, IMemberService memberService)
+        public BooksController(IBookService bookService, IAuthorService authorService)
         {
-            this.bookService = bookService;
             this.authorService = authorService;
-            this.loanService = loanService;
-            this.memberService = memberService;
+            this.bookService = bookService;
         }
 
 
         //GET: Books
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searching)
         {
             var vm = new BookIndexVm();
-            vm.Copies = bookService.GetAllBookCopies();
-            vm.Books = bookService.GetAllBooks();
-            return View(vm);
+
+            if (searching == null)
+            {
+                vm.Copies = bookService.GetAllBookCopies();
+                vm.Books = bookService.GetAllBooks();
+                return View(vm);
+            }
+            else
+            {
+                vm.Books = bookService.SearchBooks(searching);
+                vm.Copies = bookService.GetAllBookCopies();
+                return View(vm);
+            }
         }
 
         //GET: Books
-        public async Task<IActionResult> Admin()
+        public async Task<IActionResult> Admin(string searching)
         {
             var vm = new BookIndexVm();
-            vm.Copies = bookService.GetAllBookCopies();
-            vm.Books = bookService.GetAllBooks();
-            return View(vm);
+
+            if (searching == null)
+            {
+                vm.Copies = bookService.GetAllBookCopies();
+                vm.Books = bookService.GetAllBooks();
+                return View(vm);
+            }
+            else
+            {
+                vm.Books = bookService.SearchBooks(searching);
+                vm.Copies = bookService.GetAllBookCopies();
+                return View(vm);
+            }
         }
 
         // GET: Books/Create

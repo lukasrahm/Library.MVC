@@ -3,8 +3,12 @@
 @{
     ViewData["Title"] = "Index";
 }
-<h1>Boklån</h1>
-
+<h1>Boklån</h1>Sök efter lån
+@using (Html.BeginForm("Index", "Loans", FormMethod.Get))
+{
+    @Html.TextBox("searching")
+    <input type="submit" value="Sök" />
+}
 <table class="table">
     <thead>
         <tr>
@@ -20,48 +24,48 @@
         @{
             foreach (var loan in Model.Loans)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => loan.Member.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => loan.BookCopy.Book.Title)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => loan.DateOfLoan)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => loan.DateOfReturn)
-                    </td>
-                    @if (loan.Returned)
-                    {
-                        <td style="background-color: forestgreen; text-align: center">
-                            <b style="color: white">JA</b>
+
+                if (loan.Member != null)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => loan.Member.Name)
                         </td>
-                    }
-                    else if (!loan.Returned && loan.DateOfReturn < DateTime.Today.ToLocalTime())
-                    {
-                        <td style="background-color: #9b0202; text-align: center">
-                            <b style="color: white">NEJ</b>
+                        <td>
+                            @Html.DisplayFor(modelItem => loan.BookCopy.Book.Title)
                         </td>
-                    }
-                    else
-                    {
-                        <td style="text-align: center">
-                            <b>NEJ</b>
+                        <td>
+                            @Html.DisplayFor(modelItem => loan.DateOfLoan)
                         </td>
-                    }
-
-
-                <td>
-                    @if (!loan.Returned)
-                    {
-                        <a class="btn btn-success" asp-controller="Loans" asp-action="Return" asp-route-id="@loan.Id">Returnera</a>
-                    }
-                </td>
-
-
-                </tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => loan.DateOfReturn)
+                        </td>
+                        @if (loan.Returned)
+                        {
+                            <td style="background-color: forestgreen; text-align: center">
+                                <b style="color: white">JA</b>
+                            </td>
+                        }
+                        else if (!loan.Returned && loan.DateOfReturn < DateTime.Today.ToLocalTime())
+                        {
+                            <td style="background-color: #9b0202; text-align: center">
+                                <b style="color: white">NEJ</b>
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="text-align: center">
+                                <b>NEJ</b>
+                            </td>
+                        }
+                        <td>
+                            @if (!loan.Returned)
+                            {
+                                <a class="btn btn-success" asp-controller="Loans" asp-action="Return" asp-route-id="@loan.Id">Returnera</a>
+                            }
+                        </td>
+                    </tr>
+                }
             }
         }
     </tbody>

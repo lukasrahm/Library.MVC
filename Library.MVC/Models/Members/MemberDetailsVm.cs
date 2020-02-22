@@ -19,5 +19,6 @@ namespace Library.MVC.Models
 
         public int Fees { get; set; }
 
+        public int Payment { get; set; }
     }
 }

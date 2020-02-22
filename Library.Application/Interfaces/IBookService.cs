@@ -46,5 +46,7 @@ namespace Library.Application.Interfaces
         /// </summary>
         /// <returns>list of books</returns>
         IList<BookCopy> GetAllBookCopies();
+
+        IList<Book> SearchBooks(string searching);
     }
 }

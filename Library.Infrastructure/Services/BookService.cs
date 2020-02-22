@@ -81,5 +81,22 @@ namespace Library.Infrastructure.Services
         {
             return context.Copies.Find(id);
         }
+
+
+
+        public IList<Book> SearchBooks(string searching)
+        {
+            if (searching.All(c => char.IsDigit(c)))
+            {
+                if (searching.Length == 10 || searching.Length == 13)
+                {
+                    //searching for book ISBN
+                    return context.Books.Where(x => x.ISBN == searching).ToList();
+                }
+            }
+
+            //searching for book name
+            return context.Books.Where(x => x.Title.Contains(searching)).ToList();
+        }
     }
 }

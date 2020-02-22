@@ -21,5 +21,7 @@ namespace Library.Application.Interfaces
         Author GetAuthorById(int? authorId);
 
         void UpdateAuthor(Author author);
+
+        IList<Author> SearchAuthors(string searching);
     }
 }

@@ -34,5 +34,7 @@ namespace Library.Application.Interfaces
         public Member GetMemberById(int? id);
 
         void UpdateMember(Member member);
+
+        IList<Member> SearchMembers(string searching);
     }
 }

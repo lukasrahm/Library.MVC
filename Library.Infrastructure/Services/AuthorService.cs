@@ -42,5 +42,10 @@ namespace Library.Infrastructure.Services
             context.Update(author);
             context.SaveChanges();
         }
+
+        public IList<Author> SearchAuthors(string seaching)
+        {
+            return context.Authors.Where(x => x.Name.Contains(seaching)).ToList();
+        }
     }
 }

@@ -11,6 +11,13 @@
     <br />
     <a asp-action="Add">Lägg till exemplar av existerande bok</a>
 </p>
+
+Sök efter Böcker
+@using (Html.BeginForm("Admin", "Books", FormMethod.Get))
+{
+@Html.TextBox("searching")
+<input type="submit" value="Sök" />
+}
 <table class="table">
     <thead>
         <tr>
@@ -27,12 +34,12 @@
     <tbody>
         @foreach (var book in Model.Books)
         {
-            string shortDescription = new string(book.Description.Take(50).ToArray()) + "...";
-            int copies = 0;
-            if (book.Copies != null)
-            {
-                copies = book.Copies.Count;
-            }
+        string shortDescription = new string(book.Description.Take(50).ToArray()) + "...";
+        int copies = 0;
+        if (book.Copies != null)
+        {
+        copies = book.Copies.Count;
+        }
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => book.ISBN)
@@ -52,10 +59,10 @@
             @{int availableToLoan = 0;
                 foreach (var copy in book.Copies)
                 {
-                    if (!copy.OnLoan)
-                    {
-                        availableToLoan++;
-                    }
+                if (!copy.OnLoan)
+                {
+                availableToLoan++;
+                }
                 }
                 int onLoan = copies - availableToLoan;
             }

@@ -24,7 +24,19 @@
             Avgift
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Fees) SEK
+            <form asp-action="Details">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @Html.DisplayFor(model => model.Fees) SEK
+                @if (Model.Fees > 0)
+                {
+                    <div class="form-group">
+                        <input asp-for="Payment" max="@Model.Fees" min="0" />
+                        <span asp-validation-for="Payment" class="text-danger"></span>
+                        <input type="submit" value="Betala" class="btn btn-success" asp-route-id="@Model.Id" asp-route-payment="@Model.Payment" />
+                    </div>
+                }
+
+            </form>
         </dd>
 
     </dl>
@@ -48,48 +60,48 @@
     </thead>
     <tbody>
         @{
-                foreach (var loan in Model.Loans)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => loan.BookCopy.Book.Title)
+            foreach (var loan in Model.Loans)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => loan.BookCopy.Book.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => loan.DateOfLoan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => loan.DateOfReturn)
+                    </td>
+                    @if (loan.Returned)
+                    {
+                        <td style="background-color: forestgreen; text-align: center">
+                            <b style="color: white">JA</b>
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => loan.DateOfLoan)
+                    }
+                    else if (!loan.Returned && loan.DateOfReturn < DateTime.Today.ToLocalTime())
+                    {
+                        <td style="background-color: #9b0202; text-align: center">
+                            <b style="color: white">NEJ</b>
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => loan.DateOfReturn)
+                    }
+                    else
+                    {
+                        <td style="text-align: center">
+                            <b>NEJ</b>
                         </td>
-                        @if (loan.Returned)
+                    }
+
+
+                    <td>
+                        @if (!loan.Returned)
                         {
-                            <td style="background-color: forestgreen; text-align: center">
-                                <b style="color: white">JA</b>
-                            </td>
+                            <a class="btn btn-success" asp-controller="Members" asp-action="ReturnBook" asp-route-id="@loan.Id">Returnera</a>
                         }
-                        else if (!loan.Returned && loan.DateOfReturn < DateTime.Today.ToLocalTime())
-                        {
-                            <td style="background-color: #9b0202; text-align: center">
-                                <b style="color: white">NEJ</b>
-                            </td>
-                        }
-                        else
-                        {
-                            <td style="text-align: center">
-                                <b>NEJ</b>
-                            </td>
-                        }
+                    </td>
 
 
-                        <td>
-                            @if (!loan.Returned)
-                            {
-                                <a class="btn btn-success" asp-controller="Members" asp-action="ReturnBook" asp-route-id="@loan.Id">Returnera</a>
-                            }
-                        </td>
-
-
-                    </tr>
-                }
+                </tr>
+            }
         }
 
     </tbody>

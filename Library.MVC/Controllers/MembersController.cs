@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Library.Domain;
 using Library.MVC.Models;
 using Library.Application.Interfaces;
+using System.Web;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Library.MVC.Controllers
 {
@@ -24,22 +26,21 @@ namespace Library.MVC.Controllers
             this.loanService = loanService;
         }
 
-        //GET: Members
-        public async Task<IActionResult> Index()
+        //GET: Members and get searched member
+        public async Task<IActionResult> Index(string searching)
         {
             var vm = new MemberIndexVm();
-            vm.Members = memberService.GetAllMembers();
-            return View(vm);
+            if (searching == null)
+            {
+                vm.Members = memberService.GetAllMembers();
+                return View(vm);
+            }
+            else
+            {
+                vm.Members = memberService.SearchMembers(searching);
+                return View(vm);
+            }
         }
-
-
-        // GET: Members/Create
-        public IActionResult Create()
-        {
-            var vm = new MemberCreateVm();
-            return View(vm);
-        }
-
         // POST: Members/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -59,7 +60,7 @@ namespace Library.MVC.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction("Error","Home","");
+            return RedirectToAction("Error", "Home", "");
         }
 
         // GET: Member/Edit/5
@@ -116,6 +117,8 @@ namespace Library.MVC.Controllers
 
             return View(member);
         }
+
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
 
@@ -126,7 +129,7 @@ namespace Library.MVC.Controllers
 
             var vm = new MemberDetailsVm();
             var member = memberService.GetMemberById(id);
-            
+
 
             if (member == null)
             {
@@ -181,6 +184,26 @@ namespace Library.MVC.Controllers
 
 
             return RedirectToAction("Index", "Members");
+        }
+
+        [AllowAnonymous]
+        //Make payment
+        [HttpPost]
+        public async Task<IActionResult> Details(int id, int payment)
+        {
+            if (ModelState.IsValid)
+            {
+                //Avbetala
+                var member = memberService.GetMemberById(id);
+
+                member.Fees -= payment;
+
+                memberService.UpdateMember(member);
+
+               return RedirectToAction("Details", "Members", id);
+            }
+
+            return RedirectToAction("Error", "Home", "");
         }
     }
 }
