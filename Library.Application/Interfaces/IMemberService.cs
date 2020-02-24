@@ -14,27 +14,31 @@ namespace Library.Application.Interfaces
         void AddMember(Member member);
 
         /// <summary>
-        /// Updates a member
-        /// </summary>
-        /// <param name="member"></param>
-        void UpdateMemberDetails(Member member);
-
-        /// <summary>
-        /// Updates a member.
-        /// </summary>
-        /// <param name="id">Id of member to update</param>
-        /// <param name="member">New values of member (Id is ignored)</param>
-        void UpdateMemberDetails(int id, Member member);
-        /// <summary>
         /// Gets all members from the database
         /// </summary>
         /// <returns>list of members</returns>
         ICollection<Member> GetAllMembers();
 
+        /// <summary>
+        /// Returns a member by id
+        /// </summary>
+        /// <param name="id">Id of the member</param>
+        /// <returns></returns>
         public Member GetMemberById(int? id);
 
+        /// <summary>
+        /// Updates a member
+        /// </summary>
+        /// <param name="member">Which member to update</param>
         void UpdateMember(Member member);
 
-        IList<Member> SearchMembers(string searching);
+        /// <summary>
+        /// Searches the database for specific members
+        /// </summary>
+        /// <param name="search">Search name or SSN</param>
+        /// <returns></returns>
+        IList<Member> SearchMembers(string search);
+
+        void DeleteMember(Member member);
     }
 }

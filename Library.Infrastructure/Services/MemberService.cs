@@ -26,24 +26,19 @@ namespace Library.Infrastructure.Services
 
         public ICollection<Member> GetAllMembers()
         {
-            // Here we are using .Include() to eager load the author, read more about loading related data at https://docs.microsoft.com/en-us/ef/core/querying/related-data
             return context.Members.ToList();
-        }
-
-        public void UpdateMemberDetails(Member member)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdateMemberDetails(int id, Member member)
-        {
-            throw new NotImplementedException();
         }
 
         public Member GetMemberById(int? id)
         {
+            //Get member by id
             Member member = context.Members.Find(id);
-            member.Loans = context.Loans.Where(x => x.MemberId == id).OrderBy(x => x.Returned).ToList();
+            if (member != null)
+            {
+                //Add all the members loans, show loans that has not been returned first
+                member.Loans = context.Loans.Where(x => x.MemberId == id).OrderBy(x => x.Returned).ToList();
+            }
+
             return member;
         }
 
@@ -54,15 +49,24 @@ namespace Library.Infrastructure.Services
         }
 
 
-        public IList<Member> SearchMembers(string searching)
+        public IList<Member> SearchMembers(string search)
         {
-            if (searching.All(c => char.IsDigit(c)))
+            //If all characters are numbers
+            if (search.All(c => char.IsDigit(c)))
             {
-                    //searching for book SSN
-                    return context.Members.Where(x => x.SSN.Contains(searching)).ToList();
+                //searching for member SSN
+                return context.Members.Where(x => x.SSN.Contains(search)).ToList();
             }
 
-            return context.Members.Where(x => x.Name.Contains(searching)).ToList();
+            //If all characters was not numbers it searches member names instead
+            return context.Members.Where(x => x.Name.Contains(search)).ToList();
+        }
+
+        public void DeleteMember(Member member)
+        {
+            context.Remove(member);
+            context.SaveChanges();
+
         }
     }
 }

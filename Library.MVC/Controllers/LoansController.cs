@@ -23,21 +23,21 @@ namespace Library.MVC.Controllers
         }
 
         //GET: Loans
-        public async Task<IActionResult> Index(string searching)
+        public async Task<IActionResult> Index(string search)
         {
             var vm = new LoansVm();
             vm.Loans = loanService.GetAllLoans();
             vm.Copies = bookService.GetAllBookCopies();
             vm.Books = bookService.GetAllBooks();
 
-            if (searching == null)
+            if (search == null)
             {
                 vm.Members = memberService.GetAllMembers();
                 return View(vm);
             }
             else
             {
-                vm.Members = memberService.SearchMembers(searching);
+                vm.Members = memberService.SearchMembers(search);
                 return View(vm);
             }
         }

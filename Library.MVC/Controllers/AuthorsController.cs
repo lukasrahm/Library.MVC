@@ -13,27 +13,26 @@ namespace Library.MVC.Controllers
 {
     public class AuthorsController : Controller
     {
-        private readonly IBookService bookService;
         private readonly IAuthorService authorService;
 
-        public AuthorsController(IBookService bookService, IAuthorService authorService)
+        public AuthorsController(IAuthorService authorService)
         {
 
-            this.bookService = bookService;
             this.authorService = authorService;
         }
 
-        public async Task<IActionResult> Index(string searching)
+        public async Task<IActionResult> Index(string search)
         {
             var vm = new AuthorIndexVm();
-            if (searching == null)
+            
+            if (search == null) //If search is empty the list will show all authors
             {
                 vm.Authors = authorService.GetAllAuthors();
                 return View(vm);
             }
-            else
+            else //Show search result
             {
-                vm.Authors = authorService.SearchAuthors(searching);
+                vm.Authors = authorService.SearchAuthors(search);
                 return View(vm);
             }
 
@@ -47,15 +46,13 @@ namespace Library.MVC.Controllers
         }
 
         // POST: Authors/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AuthorCreateVm vm)
         {
             if (ModelState.IsValid)
             {
-                //Skapa ny bok
+                //Create new author
                 var newAuthor = new Author();
                 newAuthor.Name = vm.Name;
 
@@ -67,15 +64,26 @@ namespace Library.MVC.Controllers
             return RedirectToAction("Error", "Home", "");
         }
 
-        public async Task<IActionResult> Books(int? Id)
+        /// <summary>
+        /// Shows all books from specific author
+        /// </summary>
+        /// <param name="authorId">Authors id</param>
+        /// <returns>Books written by author</returns>
+        public async Task<IActionResult> Books(int? authorId)
         {
 
-            if (Id == null)
+            if (authorId == null)  //If the authorId field is empty
             {
                 return NotFound();
             }
 
-            var vm = authorService.GetAuthorById(Id);
+            var vm = authorService.GetAuthorById(authorId);
+
+            if (vm == null) //If the author does not exist in db
+            {
+                return NotFound();
+            }
+
             return View(vm);
         }
 
@@ -88,22 +96,20 @@ namespace Library.MVC.Controllers
                 return NotFound();
             }
 
-            var authorDetails = authorService.GetAuthorById(id);
-            if (authorDetails == null)
+            var author = authorService.GetAuthorById(id);
+            if (author == null)
             {
                 return NotFound();
             }
 
             var vm = new AuthorEditVm();
-            vm.Id = authorDetails.Id;
-            vm.Name = authorDetails.Name;
+            vm.Id = author.Id;
+            vm.Name = author.Name;
             return View(vm);
 
         }
 
         // POST: Books/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Author author)

@@ -15,7 +15,7 @@
 Sök efter Böcker
 @using (Html.BeginForm("Admin", "Books", FormMethod.Get))
 {
-@Html.TextBox("searching")
+@Html.TextBox("search")
 <input type="submit" value="Sök" />
 }
 <table class="table">
@@ -48,7 +48,7 @@ Sök efter Böcker
                 @Html.DisplayFor(modelItem => book.Title)
             </td>
             <td>
-                <a asp-controller="Authors" asp-action="Books" asp-route-id="@book.AuthorId">@Html.DisplayFor(modelItem => book.Author.Name)</a>
+                <a asp-controller="Authors" asp-action="Books" asp-route-authorId="@book.AuthorId">@Html.DisplayFor(modelItem => book.Author.Name)</a>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => shortDescription)
@@ -76,7 +76,7 @@ Sök efter Böcker
                 <a class="btn btn-primary" asp-action="Edit" asp-route-id="@book.Id">Redigera</a>
             </td>
             <td>
-                <a class="btn btn-primary" asp-action="Details" asp-route-id="@book.Id">Detaljer</a>
+                <a class="btn btn-primary" asp-action="AdminDetails" asp-route-id="@book.Id">Detaljer</a>
             </td>
             <td>
                 <a class="btn btn-danger" asp-action="Delete" asp-route-id="@book.Id">Radera</a>

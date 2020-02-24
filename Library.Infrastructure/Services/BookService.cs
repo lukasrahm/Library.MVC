@@ -39,10 +39,24 @@ namespace Library.Infrastructure.Services
 
         public Book GetBook(int? id)
         {
-            Book book = new Book();
-            book = context.Books.Find(id);
-            book.Copies = context.Copies.Where(x => x.BookId == id).ToList();
-            return book;
+            try
+            {
+                Book book = new Book();
+                book = context.Books.Find(id);
+                if(book != null)
+                {
+                    book.Copies = context.Copies.Where(x => x.BookId == id).ToList();
+                    book.Author = context.Authors.Find(book.AuthorId);
+                }
+
+                return book;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         public void DeleteBook(Book book)
@@ -71,6 +85,11 @@ namespace Library.Infrastructure.Services
             return context.Copies.Include(x => x.Book).ThenInclude(z => z.Author).OrderBy(x => x.Id).ToList();
         }
 
+        public IList<BookCopy> GetAllBookCopies(int bookId)
+        {
+            return context.Copies.Where(x => x.BookId == bookId).OrderBy(x => x.Id).ToList();
+        }
+
         public void LoanBookCopy(BookCopy copy)
         {
             context.Update(copy);
@@ -82,21 +101,26 @@ namespace Library.Infrastructure.Services
             return context.Copies.Find(id);
         }
 
-
-
-        public IList<Book> SearchBooks(string searching)
+        public void DeleteBookCopy(BookCopy bookCopy)
         {
-            if (searching.All(c => char.IsDigit(c)))
+            context.Remove(bookCopy);
+            context.SaveChanges();
+
+        }
+
+        public IList<Book> SearchBooks(string search)
+        {
+            if (search.All(c => char.IsDigit(c)))
             {
-                if (searching.Length == 10 || searching.Length == 13)
+                if (search.Length == 10 || search.Length == 13)  //If search is in ISBN format
                 {
                     //searching for book ISBN
-                    return context.Books.Where(x => x.ISBN == searching).ToList();
+                    return context.Books.Where(x => x.ISBN == search).ToList(); //Return list with ISBN search
                 }
             }
 
-            //searching for book name
-            return context.Books.Where(x => x.Title.Contains(searching)).ToList();
+            //searching for book title
+            return context.Books.Where(x => x.Title.Contains(search)).ToList(); //Return list with title search
         }
     }
 }

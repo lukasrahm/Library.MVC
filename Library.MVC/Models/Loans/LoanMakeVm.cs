@@ -13,7 +13,7 @@ namespace Library.MVC.Models
     {
         [Required]
         public int MemberId { get; set; }
-        [Display(Name = "Medlemmar")]
+        [Display(Name = "Medlem")]
         public SelectList Members { get; set; }
 
         public Book Book { get; set; }

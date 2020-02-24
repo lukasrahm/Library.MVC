@@ -9,7 +9,7 @@ namespace Library.MVC.Models
 {
     public class AuthorCreateVm
     {
-        [Display(Name = "Name")]
+        [Display(Name = "Namn")]
         [Required]
         public string Name { get; set; }
     }

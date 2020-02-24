@@ -1,7 +1,7 @@
 ﻿@model Library.MVC.Models.BookAddCopiesVm;
 
 @{
-    ViewData["Title"] = "Add";
+    ViewData["Title"] = "Exemplar";
 }
 
 <h4>Lägg till fler upplagor av en existerande bok</h4>
@@ -12,7 +12,7 @@
         <form asp-action="Add">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="AmountOfCopies" class="control-label"></label>
+                <label class="control-label">Kopior</label>
                 <input asp-for="AmountOfCopies" class="form-control" />
                 <span asp-validation-for="AmountOfCopies" class="text-danger"></span>
             </div>
@@ -20,19 +20,17 @@
                 <label asp-for="BookList" class="control-label"></label>
                 @Html.DropDownListFor(m => m.BookId, Model.BookList, "Välj bok")
                 <div>
-                    <a asp-controller="BookEdit" asp-action="Create">Lägg till ny bok</a>
+                    <a asp-controller="Books" asp-action="Create">Lägg till ny bok</a>
                 </div>
             </div>
             <div class="form-group">
+                <a class="btn btn-danger" asp-action="Admin">Tillbaka</a>
                 <input type="submit" value="Lägg till" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a class="btn btn-danger" asp-action="Admin">Tillbaka</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

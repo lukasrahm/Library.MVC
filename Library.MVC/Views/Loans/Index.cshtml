@@ -1,12 +1,12 @@
 ﻿@model Library.MVC.Models.LoansVm;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lån";
 }
 <h1>Boklån</h1>Sök efter lån
 @using (Html.BeginForm("Index", "Loans", FormMethod.Get))
 {
-    @Html.TextBox("searching")
+    @Html.TextBox("search")
     <input type="submit" value="Sök" />
 }
 <table class="table">

@@ -179,3 +179,5 @@ C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Lib
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.csproj.CopyComplete
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.csprojAssemblyReference.cache
 C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Library.MVC.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Members\Delete.cshtml.g.cs
+C:\Users\lukas\Desktop\Skola\Library.MVC\Library.MVC\obj\Debug\netcoreapp3.1\Razor\Views\Books\AdminDetails.cshtml.g.cs

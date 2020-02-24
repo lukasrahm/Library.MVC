@@ -26,14 +26,18 @@ namespace Library.Infrastructure.Services
 
         public IList<Author> GetAllAuthors()
         {
-            // Here we are NOT using .Include() so the authors books will NOT be loaded, read more about loading related data at https://docs.microsoft.com/en-us/ef/core/querying/related-data
             return context.Authors.OrderBy(x => x.Name).ToList();
         }
 
         public Author GetAuthorById(int? authorId)
         {
             Author author = context.Authors.Find(authorId);
-            author.Books = context.Books.Where(x => x.AuthorId == authorId).ToList();
+            if(author != null)
+            {
+                //Add authors books to list
+                author.Books = context.Books.Where(x => x.AuthorId == authorId).ToList();
+            }
+
             return author;
         }
 
@@ -43,9 +47,9 @@ namespace Library.Infrastructure.Services
             context.SaveChanges();
         }
 
-        public IList<Author> SearchAuthors(string seaching)
+        public IList<Author> SearchAuthors(string search)
         {
-            return context.Authors.Where(x => x.Name.Contains(seaching)).ToList();
+            return context.Authors.Where(x => x.Name.Contains(search)).ToList();
         }
     }
 }

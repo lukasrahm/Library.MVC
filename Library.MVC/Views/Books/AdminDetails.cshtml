@@ -1,7 +1,7 @@
 ﻿@model Library.Domain.Book
 
 @{
-    ViewData["Title"] = "Detaljer";
+    ViewData["Title"] = "ADetaljer";
 }
 
 <div>
@@ -42,4 +42,5 @@
 </div>
 <div>
     <a class="btn btn-danger" href='javascript:history.go(-1)'>Tillbaka</a>
+    <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model.Id">Redigera</a>
 </div>

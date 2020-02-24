@@ -1,7 +1,7 @@
 ﻿@model Library.MVC.Models.AuthorIndexVm
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Författare";
 }
 
 <h1>Författare</h1>
@@ -13,10 +13,9 @@
 Sök efter författare
 @using (Html.BeginForm("Index", "Authors", FormMethod.Get))
 {
-    @Html.TextBox("searching")
+    @Html.TextBox("search")
     <input type="submit" value="Sök" />
 }
-<table class="table">
 <table class="table">
     <thead>
         <tr>
@@ -34,7 +33,7 @@ Sök efter författare
                 @Html.DisplayFor(modelItem => item.Books)
             </td>
             <td>
-                <a class="btn btn-primary" asp-action="Books" asp-route-id="@item.Id">Visa böcker</a> 
+                <a class="btn btn-primary" asp-action="Books" asp-route-authorId="@item.Id">Visa böcker</a> 
             </td>
             <td>
                 <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Redigera</a> 

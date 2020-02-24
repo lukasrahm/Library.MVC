@@ -10,18 +10,33 @@ namespace Library.Application.Interfaces
         /// <summary>
         /// Gets all Authors
         /// </summary>
-        /// <returns>List of authors</returns>
+        /// <returns>Authors</returns>
         IList<Author> GetAllAuthors();
 
         /// <summary>
-        /// Adds the author to DB
+        /// Adds author to db
         /// </summary>
-        /// <param name="author"></param>
+        /// <param name="author">Author to add</param>
         void AddAuthor(Author author);
+
+        /// <summary>
+        /// Get specific author
+        /// </summary>
+        /// <param name="authorId">Id of the author</param>
+        /// <returns>Author</returns>
         Author GetAuthorById(int? authorId);
 
+        /// <summary>
+        /// Update author info
+        /// </summary>
+        /// <param name="author">Author info</param>
         void UpdateAuthor(Author author);
 
-        IList<Author> SearchAuthors(string searching);
+        /// <summary>
+        /// Search authors in db
+        /// </summary>
+        /// <param name="search">user search</param>
+        /// <returns>List with search result of authors</returns>
+        IList<Author> SearchAuthors(string search);
     }
 }

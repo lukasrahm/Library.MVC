@@ -26,24 +26,29 @@ namespace Library.MVC.Controllers
             this.loanService = loanService;
         }
 
-        //GET: Members and get searched member
-        public async Task<IActionResult> Index(string searching)
+        public async Task<IActionResult> Index(string search)
         {
             var vm = new MemberIndexVm();
-            if (searching == null)
+            if (search == null) //If user has not searched, return all members
             {
                 vm.Members = memberService.GetAllMembers();
                 return View(vm);
             }
-            else
+            else  //Return search result
             {
-                vm.Members = memberService.SearchMembers(searching);
+                vm.Members = memberService.SearchMembers(search);
                 return View(vm);
             }
         }
+
+        // GET: Books/Create
+        public IActionResult Create()
+        {
+            var vm = new MemberCreateVm();
+            return View(vm);
+        }
+
         // POST: Members/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MemberCreateVm vm)
@@ -118,8 +123,8 @@ namespace Library.MVC.Controllers
             return View(member);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Details(int? id)
+        // GET: Members/Delete
+        public async Task<IActionResult> Delete(int? id)
         {
 
             if (id == null)
@@ -127,27 +132,31 @@ namespace Library.MVC.Controllers
                 return NotFound();
             }
 
-            var vm = new MemberDetailsVm();
-            var member = memberService.GetMemberById(id);
+            Member member = memberService.GetMemberById(id);
 
-
-            if (member == null)
+            if (member == null) //member does not exist
             {
                 return NotFound();
             }
 
-            vm.Books = bookService.GetAllBooks();
-            vm.Fees = member.Fees;
-            vm.Loans = member.Loans;
-            vm.Name = member.Name;
-            vm.SSN = member.SSN;
-            vm.Id = member.Id;
-
-
-            return View(vm);
-
+            return View(member);
 
         }
+
+        // POST: Members/Delete
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(Member member)
+        {
+
+            memberService.DeleteMember(member);
+
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
+        
 
         // GET: Members/ReturnBook  
         public async Task<IActionResult> ReturnBook(int? id)
@@ -179,6 +188,7 @@ namespace Library.MVC.Controllers
                 memberService.UpdateMember(member);
             }
 
+            //Update loan and book status
             loanService.UpdateLoan(loan);
             bookService.UpdateBookCopy(copy);
 
@@ -186,18 +196,52 @@ namespace Library.MVC.Controllers
             return RedirectToAction("Index", "Members");
         }
 
-        [AllowAnonymous]
-        //Make payment
+        //Show member details, loans etc
+        [HttpGet]
+        public async Task<IActionResult> Details(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new MemberDetailsVm();
+            var member = memberService.GetMemberById(id);
+
+
+            if (member == null)
+            {
+                return NotFound();
+            }
+
+            vm.Books = bookService.GetAllBooks();
+            vm.Fees = member.Fees;
+            vm.Loans = member.Loans;
+            vm.Name = member.Name;
+            vm.SSN = member.SSN;
+            vm.Id = member.Id;
+
+
+            return View(vm);
+
+
+        }
+
+        //Make payment, if members has fees to pay
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Details(int id, int payment)
         {
             if (ModelState.IsValid)
             {
-                //Avbetala
+                //Get member
                 var member = memberService.GetMemberById(id);
 
+                //Subtract payment from total amount of fees
                 member.Fees -= payment;
 
+                //Update member
                 memberService.UpdateMember(member);
 
                return RedirectToAction("Details", "Members", id);

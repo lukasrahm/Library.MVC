@@ -9,11 +9,13 @@ namespace Library.MVC.Models
 {
     public class BookAddCopiesVm
     {
-        [Display(Name = "Bokdetaljer")]
+        [Display(Name = "Bok")]
         public SelectList BookList { get; set; }
         [Required]
         public int BookId { get; set; }
         [Required]
+        [Range(1, 100)]
+        [Display(Name = "Kopior")]
         public int AmountOfCopies { get; set; }
     }
 }

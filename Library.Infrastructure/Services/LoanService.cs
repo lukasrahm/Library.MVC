@@ -33,6 +33,7 @@ namespace Library.Infrastructure.Services
 
         public IList<Loan> GetAllLoans()
         {
+            //Gets loans from db, eager loads bookcopy and book to get all book details aswell
             return context.Loans.OrderBy(x => x.Returned).Include(x => x.BookCopy).ThenInclude(x => x.Book).ToList();
         }
 
@@ -40,14 +41,5 @@ namespace Library.Infrastructure.Services
         {
             return context.Loans.Find(id);
         }
-
-        public void DeleteLoan(Loan loan)
-        {
-            context.Remove(loan);
-            context.SaveChanges();
-
-        }
-
-
     }
 }

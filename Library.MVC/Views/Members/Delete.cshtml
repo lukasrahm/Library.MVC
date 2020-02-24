@@ -1,0 +1,38 @@
+﻿@model Library.Domain.Member
+
+@{
+    ViewData["Title"] = "Ta bort";
+}
+
+<h1>Ta bort</h1>
+
+<h3>Är du säker på att du vill ta bort den här medlemmen?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            SSN: 
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SSN)
+        </dd>
+        <dt class="col-sm-2">
+            Namn:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Avgifter:
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Fees) SEK
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <a class="btn btn-primary" asp-action="Index">Tillbaka</a>
+        <input type="submit" value="Ta bort" class="btn btn-danger" />
+    </form>
+</div>

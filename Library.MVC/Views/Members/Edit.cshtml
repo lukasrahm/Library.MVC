@@ -1,12 +1,12 @@
 ﻿@model Library.MVC.Models.MemberEditVm
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Ändra";
 }
 
 <h1>Redigera</h1>
 
-<h4>Bokdetaljer</h4>
+<h4>Medlem</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,14 +24,11 @@
                 <span asp-validation-for="SSN" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-success" />
+                <a class="btn btn-danger" asp-action="Index">Tillbaka</a>
+                <input type="submit" value="Spara" class="btn btn-success" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a class="btn btn-danger" asp-action="Index">Gå tillbaka</a>
 </div>
 
 @section Scripts {

@@ -8,7 +8,7 @@ namespace Library.MVC.Models
 {
     public class AuthorEditVm
     {
-        [Display(Name = "Name")]
+        [Display(Name = "Namn")]
         [Required]
         public string Name { get; set; }
 
