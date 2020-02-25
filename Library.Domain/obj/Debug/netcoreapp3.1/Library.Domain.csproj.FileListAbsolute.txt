@@ -37,4 +37,3 @@ C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Domain\obj\Debug\netcoreapp3
 C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.AssemblyInfo.cs
 C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.dll
 C:\Users\marcu\Documents\GitHub\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.pdb
-C:\Users\lukas\Desktop\Skola\Library.MVC\Library.Domain\obj\Debug\netcoreapp3.1\Library.Domain.csprojAssemblyReference.cache

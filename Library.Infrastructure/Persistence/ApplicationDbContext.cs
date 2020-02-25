@@ -57,7 +57,7 @@ namespace Library.Infrastructure.Persistence
                 new BookCopy { Id = 5, BookId = 3 }
                 );
             modelBuilder.Entity<Member>().HasData(
-                new Member { Id = 1, Name = "Lukas Rahm", SSN = "199801280919" }
+                new Member { Id = 1, Name = "Lukas Rahm", SSN = "199801280919", Fees = 50 }
                 );
             modelBuilder.Entity<Loan>().HasData(
                 new Loan { Id = 1, BookCopyId = 1, MemberId = 1, DateOfLoan = DateTime.Today.ToLocalTime(), DateOfReturn = DateTime.Today.ToLocalTime().AddDays(14), Returned = true }

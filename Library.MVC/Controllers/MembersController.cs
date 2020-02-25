@@ -59,6 +59,7 @@ namespace Library.MVC.Controllers
                 var newMember = new Member();
                 newMember.SSN = vm.SSN;
                 newMember.Name = vm.Name;
+                newMember.Fees = 0;
 
                 memberService.AddMember(newMember);
 
@@ -229,9 +230,9 @@ namespace Library.MVC.Controllers
         }
 
         //Make payment, if members has fees to pay
-        [HttpPost]
+        [HttpPost, ActionName("Details")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Details(int id, int payment)
+        public async Task<IActionResult> PayFees(int id, int payment)
         {
             if (ModelState.IsValid)
             {

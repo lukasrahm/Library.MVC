@@ -191,8 +191,8 @@ namespace Library.Infrastructure.Migrations
                         {
                             Id = 1,
                             BookCopyId = 1,
-                            DateOfLoan = new DateTime(2020, 2, 19, 0, 0, 0, 0, DateTimeKind.Local),
-                            DateOfReturn = new DateTime(2020, 3, 4, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateOfLoan = new DateTime(2020, 2, 25, 0, 0, 0, 0, DateTimeKind.Local),
+                            DateOfReturn = new DateTime(2020, 3, 10, 0, 0, 0, 0, DateTimeKind.Local),
                             MemberId = 1,
                             Returned = true
                         });
